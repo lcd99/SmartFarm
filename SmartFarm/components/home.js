@@ -85,7 +85,7 @@ export default class Home extends Component {
                     this.props.navigation.navigate('AccountManagement')
                   }>
                   <Text style={styles.txtFunction}>Quản lý tài khoản</Text>
-                  <Icon type="MaterialCommunityIcons" name="account-group" />
+                  <Icon type="Ionicons" name="people-sharp" />
                 </Button>
               </TouchableOpacity>
               <TouchableOpacity>
@@ -95,7 +95,7 @@ export default class Home extends Component {
                   style={styles.btnFunction}
                   onPress={() => this.props.navigation.navigate('Schedule', {pass:this.state.pass})}>
                   <Text style={styles.txtFunction}>Cài đặt lịch tưới</Text>
-                  <Icon type="MaterialIcons" name="settings" />
+                  <Icon type="Ionicons" name="ios-settings" />
                 </Button>
               </TouchableOpacity>
               <TouchableOpacity>
@@ -107,7 +107,7 @@ export default class Home extends Component {
                     this.props.navigation.navigate('HistorySchedule')
                   }>
                   <Text style={styles.txtFunction}>Xem lịch sử tưới</Text>
-                  <Icon type="FontAwesome" name="history" />
+                  <Icon type="Ionicons" name="md-calendar" />
                 </Button>
               </TouchableOpacity>
               <TouchableOpacity>
@@ -117,7 +117,7 @@ export default class Home extends Component {
                   style={styles.btnFunction}
                   onPress={() => this.props.navigation.navigate('Statistics')}>
                   <Text style={styles.txtFunction}>Thống kê</Text>
-                  <Icon type="FontAwesome" name="line-chart" />
+                  <Icon type="Ionicons" name="bar-chart" />
                 </Button>
               </TouchableOpacity>
             </View>

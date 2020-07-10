@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* SmartFarm2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SmartFarm2Tests.m */; };
+		00E356F31AD99517003FC87E /* SmartFarmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SmartFarmTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -15,7 +15,23 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* SmartFarm2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SmartFarm2Tests.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* SmartFarmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SmartFarmTests.m */; };
+		50F6A72D7F3C44C890842CAA /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8E9B43C1BA94A4DBF0ED022 /* AntDesign.ttf */; };
+		AE93513157644DC5AD0C58D9 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0AAEAF0EE1B4A2FBA4AB723 /* Entypo.ttf */; };
+		05553A7B06A04136BF03CAC3 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20B1C0E636624A63B41DECA8 /* EvilIcons.ttf */; };
+		0312B463FEC54358B6F80515 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E11A04A049041D791107DFF /* Feather.ttf */; };
+		DC39B298EDD44168AAB66055 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3F5E943866F4AE6842DC3CF /* FontAwesome.ttf */; };
+		82383C3017E4425288FBE6CC /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BB8347D8EBF42E78513AB2A /* FontAwesome5_Brands.ttf */; };
+		30ED1043BFBC4FA08BE9EF6F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5A6C970BBD94ED3A1C949B5 /* FontAwesome5_Regular.ttf */; };
+		86541A8B9ED741CB80209F95 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED74DCC2F4D840E18F797F6F /* FontAwesome5_Solid.ttf */; };
+		19ADA8650F52441E9F950E8B /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5394AF48D494845AC031748 /* Fontisto.ttf */; };
+		4C332AE7020247C09F790EC8 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC6893403607494BAC8590E7 /* Foundation.ttf */; };
+		67BC9F7924F54C6887833C36 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93867F71C41040D5AA2AFFE5 /* Ionicons.ttf */; };
+		4B30A738793745F0BC4DF6C6 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 580574AE63114B20BBAB429D /* MaterialCommunityIcons.ttf */; };
+		F4170F89AEB249CC92C54658 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C87F26911F74172AC402F0B /* MaterialIcons.ttf */; };
+		94AC950CC8E24CC886330519 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 276B3681D6684342A763DC41 /* Octicons.ttf */; };
+		F1078CDECA844EF6A8782556 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C1555BF33A04C52A000ED5B /* SimpleLineIcons.ttf */; };
+		101DDBACE21446DE8BF8B744 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F61A224FBE3D49BA8C7C6F6A /* Zocial.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,33 +40,49 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = SmartFarm2;
+			remoteInfo = SmartFarm;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "SmartFarm2-tvOS";
+			remoteInfo = "SmartFarm-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* SmartFarm2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartFarm2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* SmartFarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartFarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* SmartFarm2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartFarm2Tests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* SmartFarm2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartFarm2.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SmartFarm2/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SmartFarm2/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* SmartFarmTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartFarmTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* SmartFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SmartFarm/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SmartFarm/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SmartFarm2/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SmartFarm2/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SmartFarm2/main.m; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* SmartFarm2-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SmartFarm2-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* SmartFarm2-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SmartFarm2-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SmartFarm/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SmartFarm/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SmartFarm/main.m; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* SmartFarm-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SmartFarm-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* SmartFarm-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SmartFarm-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		C8E9B43C1BA94A4DBF0ED022 /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A0AAEAF0EE1B4A2FBA4AB723 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		20B1C0E636624A63B41DECA8 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4E11A04A049041D791107DFF /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D3F5E943866F4AE6842DC3CF /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4BB8347D8EBF42E78513AB2A /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A5A6C970BBD94ED3A1C949B5 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ED74DCC2F4D840E18F797F6F /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B5394AF48D494845AC031748 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EC6893403607494BAC8590E7 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		93867F71C41040D5AA2AFFE5 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		580574AE63114B20BBAB429D /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9C87F26911F74172AC402F0B /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		276B3681D6684342A763DC41 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5C1555BF33A04C52A000ED5B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F61A224FBE3D49BA8C7C6F6A /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,13 +117,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* SmartFarm2Tests */ = {
+		00E356EF1AD99517003FC87E /* SmartFarmTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* SmartFarm2Tests.m */,
+				00E356F21AD99517003FC87E /* SmartFarmTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = SmartFarm2Tests;
+			path = SmartFarmTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -102,7 +134,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* SmartFarm2 */ = {
+		13B07FAE1A68108700A75B9A /* SmartFarm */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -113,7 +145,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = SmartFarm2;
+			name = SmartFarm;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -135,11 +167,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* SmartFarm2 */,
+				13B07FAE1A68108700A75B9A /* SmartFarm */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* SmartFarm2Tests */,
+				00E356EF1AD99517003FC87E /* SmartFarmTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				2B1C3F02DC91473498FD809E /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -149,20 +182,44 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* SmartFarm2.app */,
-				00E356EE1AD99517003FC87E /* SmartFarm2Tests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* SmartFarm2-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* SmartFarm2-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* SmartFarm.app */,
+				00E356EE1AD99517003FC87E /* SmartFarmTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* SmartFarm-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* SmartFarm-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2B1C3F02DC91473498FD809E /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				C8E9B43C1BA94A4DBF0ED022 /* AntDesign.ttf */,
+				A0AAEAF0EE1B4A2FBA4AB723 /* Entypo.ttf */,
+				20B1C0E636624A63B41DECA8 /* EvilIcons.ttf */,
+				4E11A04A049041D791107DFF /* Feather.ttf */,
+				D3F5E943866F4AE6842DC3CF /* FontAwesome.ttf */,
+				4BB8347D8EBF42E78513AB2A /* FontAwesome5_Brands.ttf */,
+				A5A6C970BBD94ED3A1C949B5 /* FontAwesome5_Regular.ttf */,
+				ED74DCC2F4D840E18F797F6F /* FontAwesome5_Solid.ttf */,
+				B5394AF48D494845AC031748 /* Fontisto.ttf */,
+				EC6893403607494BAC8590E7 /* Foundation.ttf */,
+				93867F71C41040D5AA2AFFE5 /* Ionicons.ttf */,
+				580574AE63114B20BBAB429D /* MaterialCommunityIcons.ttf */,
+				9C87F26911F74172AC402F0B /* MaterialIcons.ttf */,
+				276B3681D6684342A763DC41 /* Octicons.ttf */,
+				5C1555BF33A04C52A000ED5B /* SimpleLineIcons.ttf */,
+				F61A224FBE3D49BA8C7C6F6A /* Zocial.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* SmartFarm2Tests */ = {
+		00E356ED1AD99517003FC87E /* SmartFarmTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SmartFarm2Tests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SmartFarmTests" */;
 			buildPhases = (
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
@@ -173,14 +230,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = SmartFarm2Tests;
-			productName = SmartFarm2Tests;
-			productReference = 00E356EE1AD99517003FC87E /* SmartFarm2Tests.xctest */;
+			name = SmartFarmTests;
+			productName = SmartFarmTests;
+			productReference = 00E356EE1AD99517003FC87E /* SmartFarmTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* SmartFarm2 */ = {
+		13B07F861A680F5B00A75B9A /* SmartFarm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SmartFarm2" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SmartFarm" */;
 			buildPhases = (
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -192,14 +249,14 @@
 			);
 			dependencies = (
 			);
-			name = SmartFarm2;
-			productName = SmartFarm2;
-			productReference = 13B07F961A680F5B00A75B9A /* SmartFarm2.app */;
+			name = SmartFarm;
+			productName = SmartFarm;
+			productReference = 13B07F961A680F5B00A75B9A /* SmartFarm.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* SmartFarm2-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* SmartFarm-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SmartFarm2-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SmartFarm-tvOS" */;
 			buildPhases = (
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
@@ -211,14 +268,14 @@
 			);
 			dependencies = (
 			);
-			name = "SmartFarm2-tvOS";
-			productName = "SmartFarm2-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* SmartFarm2-tvOS.app */;
+			name = "SmartFarm-tvOS";
+			productName = "SmartFarm-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* SmartFarm-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* SmartFarm2-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* SmartFarm-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SmartFarm2-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SmartFarm-tvOSTests" */;
 			buildPhases = (
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
@@ -229,9 +286,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "SmartFarm2-tvOSTests";
-			productName = "SmartFarm2-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* SmartFarm2-tvOSTests.xctest */;
+			name = "SmartFarm-tvOSTests";
+			productName = "SmartFarm-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* SmartFarm-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -260,7 +317,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SmartFarm2" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SmartFarm" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -273,10 +330,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* SmartFarm2 */,
-				00E356ED1AD99517003FC87E /* SmartFarm2Tests */,
-				2D02E47A1E0B4A5D006451C7 /* SmartFarm2-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* SmartFarm2-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* SmartFarm */,
+				00E356ED1AD99517003FC87E /* SmartFarmTests */,
+				2D02E47A1E0B4A5D006451C7 /* SmartFarm-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* SmartFarm-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -295,6 +352,22 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				50F6A72D7F3C44C890842CAA /* AntDesign.ttf in Resources */,
+				AE93513157644DC5AD0C58D9 /* Entypo.ttf in Resources */,
+				05553A7B06A04136BF03CAC3 /* EvilIcons.ttf in Resources */,
+				0312B463FEC54358B6F80515 /* Feather.ttf in Resources */,
+				DC39B298EDD44168AAB66055 /* FontAwesome.ttf in Resources */,
+				82383C3017E4425288FBE6CC /* FontAwesome5_Brands.ttf in Resources */,
+				30ED1043BFBC4FA08BE9EF6F /* FontAwesome5_Regular.ttf in Resources */,
+				86541A8B9ED741CB80209F95 /* FontAwesome5_Solid.ttf in Resources */,
+				19ADA8650F52441E9F950E8B /* Fontisto.ttf in Resources */,
+				4C332AE7020247C09F790EC8 /* Foundation.ttf in Resources */,
+				67BC9F7924F54C6887833C36 /* Ionicons.ttf in Resources */,
+				4B30A738793745F0BC4DF6C6 /* MaterialCommunityIcons.ttf in Resources */,
+				F4170F89AEB249CC92C54658 /* MaterialIcons.ttf in Resources */,
+				94AC950CC8E24CC886330519 /* Octicons.ttf in Resources */,
+				F1078CDECA844EF6A8782556 /* SimpleLineIcons.ttf in Resources */,
+				101DDBACE21446DE8BF8B744 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* SmartFarm2Tests.m in Sources */,
+				00E356F31AD99517003FC87E /* SmartFarmTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* SmartFarm2Tests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* SmartFarmTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,12 +497,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* SmartFarm2 */;
+			target = 13B07F861A680F5B00A75B9A /* SmartFarm */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* SmartFarm2-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* SmartFarm-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -441,7 +514,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = SmartFarm2;
+			path = SmartFarm;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -455,7 +528,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SmartFarm2Tests/Info.plist;
+				INFOPLIST_FILE = SmartFarmTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -465,7 +538,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartFarm2.app/SmartFarm2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartFarm.app/SmartFarm";
 			};
 			name = Debug;
 		};
@@ -474,7 +547,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = SmartFarm2Tests/Info.plist;
+				INFOPLIST_FILE = SmartFarmTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -484,7 +557,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartFarm2.app/SmartFarm2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartFarm.app/SmartFarm";
 			};
 			name = Release;
 		};
@@ -499,7 +572,7 @@
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
-				INFOPLIST_FILE = SmartFarm2/Info.plist;
+				INFOPLIST_FILE = SmartFarm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -507,7 +580,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = SmartFarm2;
+				PRODUCT_NAME = SmartFarm;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -520,7 +593,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = SmartFarm2/Info.plist;
+				INFOPLIST_FILE = SmartFarm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -528,7 +601,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = SmartFarm2;
+				PRODUCT_NAME = SmartFarm;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -546,14 +619,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SmartFarm2-tvOS/Info.plist";
+				INFOPLIST_FILE = "SmartFarm-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SmartFarm2-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SmartFarm-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -573,14 +646,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SmartFarm2-tvOS/Info.plist";
+				INFOPLIST_FILE = "SmartFarm-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SmartFarm2-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SmartFarm-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -599,17 +672,17 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SmartFarm2-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "SmartFarm-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SmartFarm2-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SmartFarm-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartFarm2-tvOS.app/SmartFarm2-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartFarm-tvOS.app/SmartFarm-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
@@ -625,17 +698,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SmartFarm2-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "SmartFarm-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SmartFarm2-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SmartFarm-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartFarm2-tvOS.app/SmartFarm2-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartFarm-tvOS.app/SmartFarm-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -756,7 +829,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SmartFarm2Tests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SmartFarmTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -765,7 +838,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SmartFarm2" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SmartFarm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -774,7 +847,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SmartFarm2-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SmartFarm-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -783,7 +856,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SmartFarm2-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SmartFarm-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -792,7 +865,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SmartFarm2" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SmartFarm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

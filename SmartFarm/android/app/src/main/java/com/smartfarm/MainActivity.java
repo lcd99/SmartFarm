@@ -1,4 +1,4 @@
-package com.smartfarm2;
+package com.smartfarm;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "SmartFarm2";
+    return "SmartFarm";
   }
 }

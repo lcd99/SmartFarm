@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "SmartFarm2-tvOS.app"
-               BlueprintName = "SmartFarm2-tvOS"
-               ReferencedContainer = "container:SmartFarm2.xcodeproj">
+               BuildableName = "SmartFarm-tvOS.app"
+               BlueprintName = "SmartFarm-tvOS"
+               ReferencedContainer = "container:SmartFarm.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "SmartFarm2-tvOSTests.xctest"
-               BlueprintName = "SmartFarm2-tvOSTests"
-               ReferencedContainer = "container:SmartFarm2.xcodeproj">
+               BuildableName = "SmartFarm-tvOSTests.xctest"
+               BlueprintName = "SmartFarm-tvOSTests"
+               ReferencedContainer = "container:SmartFarm.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "SmartFarm2-tvOS.app"
-            BlueprintName = "SmartFarm2-tvOS"
-            ReferencedContainer = "container:SmartFarm2.xcodeproj">
+            BuildableName = "SmartFarm-tvOS.app"
+            BlueprintName = "SmartFarm-tvOS"
+            ReferencedContainer = "container:SmartFarm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "SmartFarm2-tvOS.app"
-            BlueprintName = "SmartFarm2-tvOS"
-            ReferencedContainer = "container:SmartFarm2.xcodeproj">
+            BuildableName = "SmartFarm-tvOS.app"
+            BlueprintName = "SmartFarm-tvOS"
+            ReferencedContainer = "container:SmartFarm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

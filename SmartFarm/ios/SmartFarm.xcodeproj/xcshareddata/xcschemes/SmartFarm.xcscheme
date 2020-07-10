@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "SmartFarm2.app"
-               BlueprintName = "SmartFarm2"
-               ReferencedContainer = "container:SmartFarm2.xcodeproj">
+               BuildableName = "SmartFarm.app"
+               BlueprintName = "SmartFarm"
+               ReferencedContainer = "container:SmartFarm.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "SmartFarm2Tests.xctest"
-               BlueprintName = "SmartFarm2Tests"
-               ReferencedContainer = "container:SmartFarm2.xcodeproj">
+               BuildableName = "SmartFarmTests.xctest"
+               BlueprintName = "SmartFarmTests"
+               ReferencedContainer = "container:SmartFarm.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "SmartFarm2.app"
-            BlueprintName = "SmartFarm2"
-            ReferencedContainer = "container:SmartFarm2.xcodeproj">
+            BuildableName = "SmartFarm.app"
+            BlueprintName = "SmartFarm"
+            ReferencedContainer = "container:SmartFarm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "SmartFarm2.app"
-            BlueprintName = "SmartFarm2"
-            ReferencedContainer = "container:SmartFarm2.xcodeproj">
+            BuildableName = "SmartFarm.app"
+            BlueprintName = "SmartFarm"
+            ReferencedContainer = "container:SmartFarm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

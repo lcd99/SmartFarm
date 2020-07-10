@@ -1,5 +1,5 @@
 {
-  "name": "SmartFarm2",
+  "name": "SmartFarm",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -35,7 +35,7 @@
     "react-native-simple-time-picker": "^0.2.0",
     "react-native-simple-toast": "^1.1.2",
     "react-native-swipeout": "^2.3.6",
-    "react-native-vector-icons": "^6.6.0",
+    "react-native-vector-icons": "^6.7.0",
     "react-native-websocket": "^1.0.2",
     "react-time-picker": "^4.0.1",
     "react-timer-mixin": "^0.13.4",

@@ -5,6 +5,7 @@
  * @format
  * @flow strict-local
  */
+
 import React, {Component, useEffect, useState} from 'react';
 import { AppState} from 'react-native';
 
@@ -47,9 +48,9 @@ console.disableYellowBox = true;
             tabBarIcon: ({focused, color, size}) => {
               let iconName;
               if (route.name === 'Home') {
-                iconName = focused ? 'ios-home' : 'ios-home';
+                iconName = focused ? 'md-home' : 'md-home';
               } else if (route.name === 'Profile') {
-                iconName = focused ? 'ios-contact' : 'ios-contact';
+                iconName = focused ? 'ios-person-circle' : 'ios-person-circle';
               }
 
               // You can return any component that you like here!

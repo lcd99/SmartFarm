@@ -156,7 +156,7 @@ export default class Login extends Component {
               />
             </InputGroup>
             <InputGroup iconLeft iconRight rounded style={styles.InputGroup}>
-              <Icon name="ios-lock" type="Ionicons" style={styles.inputIcon} />
+              <Icon name="ios-lock-closed" type="Ionicons" style={styles.inputIcon} />
               <Input
                 placeholder="Password"
                 secureTextEntry={this.state.showPass}

@@ -44,8 +44,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'SmartFarm2' do
-  # Pods for SmartFarm2
+target 'SmartFarm' do
+  # Pods for SmartFarm
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -77,7 +77,9 @@ target 'SmartFarm2' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'SmartFarm2Tests' do
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  target 'SmartFarmTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -94,10 +96,10 @@ target 'SmartFarm2' do
   end
 end
 
-target 'SmartFarm2-tvOS' do
-  # Pods for SmartFarm2-tvOS
+target 'SmartFarm-tvOS' do
+  # Pods for SmartFarm-tvOS
 
-  target 'SmartFarm2-tvOSTests' do
+  target 'SmartFarm-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

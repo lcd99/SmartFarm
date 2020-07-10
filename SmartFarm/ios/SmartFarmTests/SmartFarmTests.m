@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface SmartFarm2Tests : XCTestCase
+@interface SmartFarmTests : XCTestCase
 
 @end
 
-@implementation SmartFarm2Tests
+@implementation SmartFarmTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {
