@@ -41,6 +41,13 @@ def flipper_post_install(installer)
         config.build_settings['SWIFT_VERSION'] = '4.1'
       end
     end
+
+    # Enable Flipper for simulators only
+    if target.name.start_with?('Flipper')
+      target.build_configurations.each do |config|
+        config.build_settings['VALID_ARCHS'] = 'arm64 arm64e'
+      end
+    end
   end
 end
 
@@ -76,6 +83,7 @@ target 'SmartFarm' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 

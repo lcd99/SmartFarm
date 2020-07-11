@@ -38,8 +38,12 @@ export default class Home extends Component {
     };
   }
 
-  backAction = () => {
-    return true;
+  // backAction = () => {
+  //   return true;
+  // };
+
+  log = () => {
+    console.log('test');
   };
 
   componentDidMount() {
@@ -76,46 +80,38 @@ export default class Home extends Component {
           <View style={styles.TextHeader}>
             <Text style={styles.txtHeader}>Chức năng</Text>
             <View style={styles.iconView}>
-              <TouchableOpacity>
-                <Button
-                  transparent
-                  dark
-                  style={styles.btnFunction}
-                  onPress={() =>
-                    this.props.navigation.navigate('AccountManagement')
-                  }>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate('AccountManagement')
+                }>
+                <Button transparent dark style={styles.btnFunction}>
                   <Text style={styles.txtFunction}>Quản lý tài khoản</Text>
                   <Icon type="Ionicons" name="people-sharp" />
                 </Button>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Button
-                  transparent
-                  dark
-                  style={styles.btnFunction}
-                  onPress={() => this.props.navigation.navigate('Schedule', {pass:this.state.pass})}>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate('Schedule', {
+                    pass: this.state.pass,
+                  })
+                }>
+                <Button transparent dark style={styles.btnFunction}>
                   <Text style={styles.txtFunction}>Cài đặt lịch tưới</Text>
                   <Icon type="Ionicons" name="ios-settings" />
                 </Button>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Button
-                  transparent
-                  dark
-                  style={styles.btnFunction}
-                  onPress={() =>
-                    this.props.navigation.navigate('HistorySchedule')
-                  }>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate('HistorySchedule')
+                }>
+                <Button transparent dark style={styles.btnFunction}>
                   <Text style={styles.txtFunction}>Xem lịch sử tưới</Text>
                   <Icon type="Ionicons" name="md-calendar" />
                 </Button>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Button
-                  transparent
-                  dark
-                  style={styles.btnFunction}
-                  onPress={() => this.props.navigation.navigate('Statistics')}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Statistics')}>
+                <Button transparent dark style={styles.btnFunction}>
                   <Text style={styles.txtFunction}>Thống kê</Text>
                   <Icon type="Ionicons" name="bar-chart" />
                 </Button>
@@ -218,7 +214,7 @@ const styles = StyleSheet.create({
   },
 
   btnFunction: {
-    backgroundColor: '#fff',
+    //backgroundColor: '#fff',
     backgroundColor: 'rgba(244, 246, 246, 0.9)',
     borderRadius: 10,
     marginTop: 5,

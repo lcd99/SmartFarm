@@ -21,7 +21,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import NetInfo from '@react-native-community/netinfo';
 import Toast from 'react-native-simple-toast';
 
-import Home from './home.js';
+//import Home from './home.js';
 import logo from '../images/logoSF.png';
 import bg from '../images/bg.jpg';
 import websocket from './websocket.js';
@@ -112,8 +112,8 @@ export default class Login extends Component {
 
           this.AlertFailSetupDevice;
         }
-      } else if (data.action == 'login') {
-        if (data.message == 'Login success') {
+      } else if (data.action === 'login') {
+        if (data.message === 'Login success') {
           //console.log(data.data);
           this.setState({spinner: !this.state.spinner});
 
@@ -156,7 +156,11 @@ export default class Login extends Component {
               />
             </InputGroup>
             <InputGroup iconLeft iconRight rounded style={styles.InputGroup}>
-              <Icon name="ios-lock-closed" type="Ionicons" style={styles.inputIcon} />
+              <Icon
+                name="ios-lock-closed"
+                type="Ionicons"
+                style={styles.inputIcon}
+              />
               <Input
                 placeholder="Password"
                 secureTextEntry={this.state.showPass}

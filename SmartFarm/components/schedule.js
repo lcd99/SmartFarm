@@ -19,7 +19,6 @@ import {
   Container,
   Content,
   Button,
-  Text,
   Icon,
   Left,
   CheckBox,
@@ -30,6 +29,7 @@ import {
   Footer,
   FooterTab,
   Form,
+  Text,
 } from 'native-base';
 
 //import ToggleSwitch from 'toggle-switch-react-native';
@@ -378,39 +378,37 @@ export default class Schedule extends Component {
     //this.setState({dialogVisible: false});
   };
 
-
-
   toggleEditItem() {
     if (!this.state.editItem) {
       Animated.parallel([
-          Animated.timing(this.state.controlOpacity, {
-            toValue: 1,
-            duration: 400,
-          }),
-          Animated.timing(this.state.controlHeight, {
-            toValue: 50,
-            duration: 400,
-          }),
-          Animated.timing(this.state.controlWidth, {
-            toValue: 20,
-            duration: 400,
-          }),
+        Animated.timing(this.state.controlOpacity, {
+          toValue: 1,
+          duration: 400,
+        }),
+        Animated.timing(this.state.controlHeight, {
+          toValue: 50,
+          duration: 400,
+        }),
+        Animated.timing(this.state.controlWidth, {
+          toValue: 20,
+          duration: 400,
+        }),
       ]).start();
     } else {
       Animated.parallel([
-          Animated.timing(this.state.controlOpacity, {
-            toValue: 0,
-            duration: 400,
-          }),
-          Animated.timing(this.state.controlHeight, {
-            toValue: 0,
-            duration: 400,
-          }),
-          Animated.timing(this.state.controlWidth, {
-            toValue: 0,
-            duration: 400,
-          }),
-        ]).start();
+        Animated.timing(this.state.controlOpacity, {
+          toValue: 0,
+          duration: 400,
+        }),
+        Animated.timing(this.state.controlHeight, {
+          toValue: 0,
+          duration: 400,
+        }),
+        Animated.timing(this.state.controlWidth, {
+          toValue: 0,
+          duration: 400,
+        }),
+      ]).start();
     }
 
     this.setState({editItem: !this.state.editItem});
@@ -460,10 +458,10 @@ export default class Schedule extends Component {
             text={{
               on: 'on',
               off: 'off',
-              activeTextColor: 'white',
-              inactiveTextColor: 'white',
+              activeTextColor: '#000',
+              inactiveTextColor: '#000',
             }}
-            textStyle={{fontWeight: 'italic'}}
+            textStyle={{fontWeight: '200'}}
             color={{
               indicator: 'white',
               active: 'rgba(0, 181, 0, 1)',
@@ -882,7 +880,6 @@ export default class Schedule extends Component {
                               {this.state.rangeDay.toString()}
                             </Text>
                             <Icon
-                              size={16}
                               type="Entypo"
                               name="chevron-small-right"
                               style={styles.iconItemModal}
@@ -904,7 +901,6 @@ export default class Schedule extends Component {
                               {this.state.irrigationTime} phút
                             </Text>
                             <Icon
-                              size={16}
                               type="Entypo"
                               name="chevron-small-right"
                               style={styles.iconItemModal}
@@ -979,7 +975,6 @@ export default class Schedule extends Component {
                               {this.state.irrigationFlow} lít
                             </Text>
                             <Icon
-                              size={16}
                               type="Entypo"
                               name="chevron-small-right"
                               style={styles.iconItemModal}
@@ -1051,12 +1046,11 @@ export default class Schedule extends Component {
                               </Text>
                             </Left>
                             <Text style={styles.txtMinute}>
-                              {this.state.timeIrr == true
+                              {this.state.timeIrr === true
                                 ? 'Tưới theo thời gian'
                                 : 'Tưới theo lưu lượng'}
                             </Text>
                             <Icon
-                              size={16}
                               type="Entypo"
                               name="chevron-small-right"
                               style={styles.iconItemModal}
@@ -1108,7 +1102,7 @@ export default class Schedule extends Component {
                         <View style={styles.modalOptions}>
                           <View style={styles.itemOptions}>
                             <Left>
-                              <Text style={styles.txtDay}>
+                              <Text style={styles.txtItemModal}>
                                 Lặp lại hằng tuần
                               </Text>
                             </Left>
@@ -1160,8 +1154,8 @@ const styles = StyleSheet.create({
     margin: 0,
   },
 
-  btnDelete:{
-    marginHorizontal: 50
+  btnDelete: {
+    marginHorizontal: 50,
   },
 
   itemContent: {
@@ -1187,23 +1181,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#454545',
     fontStyle: 'italic',
+    height: 15,
   },
-
-  btnAdd: {
-    backgroundColor: 'rgba(244, 246, 246, 0.9)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // borderRadius: 50,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.23,
-    // shadowRadius: 2.62,
-    // elevation: 4,
-  },
-
   centeredView: {},
 
   modalView: {
@@ -1217,6 +1196,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     elevation: 5,
     flexDirection: 'column',
+    top: 50,
   },
 
   modalHeader: {
@@ -1254,11 +1234,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-  txtItemModal: {},
+  txtItemModal: {
+    color: '#454545',
+    height: 20,
+    fontWeight: '500',
+  },
 
   iconItemModal: {
     color: '#454545',
     right: -5,
+    height: 30,
   },
 
   viewChoseTime: {
@@ -1305,6 +1290,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    top: 50,
   },
 
   textInputTime: {
@@ -1338,6 +1324,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    top: 50,
   },
 
   textStyle: {
@@ -1361,6 +1348,7 @@ const styles = StyleSheet.create({
 
   txtDay: {
     marginBottom: 5,
+    height: 20,
   },
 
   cbSelectDay: {

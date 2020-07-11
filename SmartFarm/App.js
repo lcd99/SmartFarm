@@ -7,10 +7,10 @@
  */
 
 import React, {Component, useEffect, useState} from 'react';
-import { AppState} from 'react-native';
+import {AppState} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+//import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -26,13 +26,15 @@ import AccountManagement from './components/AccountManagement.js';
 import HistorySchedule from './components/historySchedule.js';
 import Statistics from './components/statistical.js';
 
-const Drawer = createDrawerNavigator();
+//const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+Ionicons.loadFont();
+
 console.disableYellowBox = true;
 
- class SmartFarm extends Component {
+class SmartFarm extends Component {
   constructor(props) {
     super(props);
   }
@@ -103,6 +105,7 @@ console.disableYellowBox = true;
           />
           <Stack.Screen
             name="Home"
+            // eslint-disable-next-line no-undef
             component={createHomeStack}
             options={{
               headerShown: false,
