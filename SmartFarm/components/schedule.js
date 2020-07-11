@@ -702,6 +702,21 @@ export default class Schedule extends Component {
                         onPress={() => {
                           this.setModalVisibleChoseDay(true);
                         }}>
+                        <View style={styles.modalOptions}>
+                          <View style={styles.itemOptions}>
+                            <Left>
+                              <Text style={styles.txtItemModal}>Lặp lại</Text>
+                            </Left>
+                            <Text style={styles.txtMinute}>
+                              {this.state.rangeDay.toString()}
+                            </Text>
+                            <Icon
+                              type="Entypo"
+                              name="chevron-small-right"
+                              style={styles.iconItemModal}
+                            />
+                          </View>
+                        </View>
                         <Modal
                           scrollHorizontal={true}
                           animationType="slide"
@@ -870,22 +885,6 @@ export default class Schedule extends Component {
                             </ScrollView>
                           </View>
                         </Modal>
-
-                        <View style={styles.modalOptions}>
-                          <View style={styles.itemOptions}>
-                            <Left>
-                              <Text style={styles.txtItemModal}>Lặp lại</Text>
-                            </Left>
-                            <Text style={styles.txtMinute}>
-                              {this.state.rangeDay.toString()}
-                            </Text>
-                            <Icon
-                              type="Entypo"
-                              name="chevron-small-right"
-                              style={styles.iconItemModal}
-                            />
-                          </View>
-                        </View>
                       </TouchableOpacity>
 
                       <TouchableOpacity
@@ -1181,7 +1180,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#454545',
     fontStyle: 'italic',
-    height: 15,
+    height: 18,
   },
   centeredView: {},
 
@@ -1196,7 +1195,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     elevation: 5,
     flexDirection: 'column',
-    top: 50,
+    marginTop: 50,
   },
 
   modalHeader: {
@@ -1214,7 +1213,7 @@ const styles = StyleSheet.create({
 
   iconHeaderModal: {
     color: '#454545',
-    top: -10,
+    marginTop: -10,
   },
 
   modalOptions: {
@@ -1290,7 +1289,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    top: 50,
+    marginTop: 50,
   },
 
   textInputTime: {
@@ -1324,7 +1323,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    top: 50,
+    marginTop: 50,
   },
 
   textStyle: {
@@ -1336,7 +1335,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomColor: '#D6DBDF',
     borderBottomWidth: 1,
-    top: 10,
+    marginTop: 10,
     marginVertical: 10,
   },
 
@@ -1357,7 +1356,7 @@ const styles = StyleSheet.create({
   },
 
   viewButton: {
-    top: 20,
+    marginTop: 20,
     flexDirection: 'row',
     textAlign: 'center',
     alignItems: 'center',
