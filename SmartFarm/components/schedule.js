@@ -140,7 +140,7 @@ export default class Schedule extends Component {
     }
   };
 
-  loadDay = day => {
+  loadDays = day => {
     var loadDay = new Array();
     var arr = day
       .toString(10)
@@ -450,7 +450,7 @@ export default class Schedule extends Component {
           </Text>
 
           <Text style={styles.txtMinute}>
-            Ngày tưới: {this.loadDay(item.day)}
+            Ngày tưới: {this.loadDays(item.day)}
           </Text>
         </Body>
         <Right>
@@ -483,6 +483,22 @@ export default class Schedule extends Component {
     </View>
   );
 
+  setDataSchedule = () => {
+    try {
+      var getScheduleIrr = {
+        action: 'ClientGetScheduleIrr',
+      };
+      websocket.send(JSON.stringify(getScheduleIrr));
+      this.unReceive = websocket.receive(e => {
+        //console.log(e);
+        const data = JSON.parse(e.data);
+        this.setState({dataSchedule: data, ...this.state.dataSchedule});
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   componentWillUnmount() {
     if (this.unReceive) {
       this.unReceive();
@@ -502,41 +518,27 @@ export default class Schedule extends Component {
       };
       websocket.send(JSON.stringify(getScheduleIrr));
       this.unReceive = websocket.receive(e => {
-        //console.log(e);
         const data = JSON.parse(e.data);
 
-        //console.log(e);
+        console.log(data.action);
+        //console.log(JSON.parse(data.message));
+        if (data.action == 'getDataSchedule') {
+          const dataSchedule = JSON.parse(data.message);
+          this.setState({dataSchedule: dataSchedule});
+        }
         if (
           data.action == 'addScheduleModeTime' ||
           data.action == 'addScheduleModeFlow'
         ) {
           if (data.message == 'addSchedule success') {
             console.log('Thêm thành công');
-
-            websocket.send(JSON.stringify(getScheduleIrr));
-            this.unReceive = websocket.receive(e => {
-              //console.log(e);
-              const data = JSON.parse(e.data);
-              this.setState({dataSchedule: data});
-            });
             this.setModalVisible(false);
             //this.setState({spinner: !this.state.spinner});
           } else {
-            //alert(data.message);
-            //console.log('Thêm thất bại');
+            alert(data.message);
+            console.log('Thêm thất bại');
           }
-        } else if (data.action == 'updateStatus') {
-          if (data.message == 'updateSuccess') {
-            console.log('updateSuccess');
-            this.setState({dialogVisible: false});
-          } else {
-            console.log('updateFail');
-          }
-        } else {
-          this.setState({dataSchedule: data});
-          //this.setState({spinner: !this.state.spinner});
         }
-
         if (data.action == 'deleteSchedule') {
           if (data.message == 'deleteSuccess') {
             console.log('deleteSuccess');
@@ -545,15 +547,17 @@ export default class Schedule extends Component {
             this.setState({isChecked: new Array()});
             this.setState({selectedLists: new Array()});
 
-            websocket.send(JSON.stringify(getScheduleIrr));
-
-            this.unReceive = websocket.receive(e => {
-              //console.log(e);
-              const data = JSON.parse(e.data);
-              this.setState({dataSchedule: data});
-            });
+            this.setDataSchedule;
           } else {
             console.log('deleteFail');
+          }
+        }
+        if (data.action == 'updateStatus') {
+          if (data.message == 'updateSuccess') {
+            console.log('updateSuccess');
+            this.setState({dialogVisible: false});
+          } else {
+            console.log('updateFail');
           }
         }
       });
@@ -602,19 +606,17 @@ export default class Schedule extends Component {
             <Dialog.Button label="Delete" onPress={this.handleDelete} />
           </Dialog.Container>
         </View>
-        <ScrollView>
-          <Content style={styles.Content}>
-            <SafeAreaView style={styles.container}>
-              <FlatList
-                data={dataSchedule}
-                keyExtractor={item => item.id}
-                renderItem={this.renderItem}
-                refreshing={this.state.refreshData}
-                // onRefresh={this.handleRefresh}
-              />
-            </SafeAreaView>
-          </Content>
-        </ScrollView>
+        <Content style={styles.Content}>
+          <SafeAreaView style={styles.container}>
+            <FlatList
+              data={dataSchedule}
+              keyExtractor={item => item.id}
+              renderItem={this.renderItem}
+              refreshing={this.state.refreshData}
+              // onRefresh={this.handleRefresh}
+            />
+          </SafeAreaView>
+        </Content>
         <Animated.View
           style={{
             ...styles.btnDelete,

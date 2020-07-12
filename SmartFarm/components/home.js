@@ -38,24 +38,19 @@ export default class Home extends Component {
     };
   }
 
-  // backAction = () => {
-  //   return true;
-  // };
-
   log = () => {
     console.log('test');
   };
 
-  componentDidMount() {
-    this.backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      this.backAction,
-    );
-  }
-
-  componentWillUnmount() {
-    this.backHandler.remove();
-  }
+  // componentDidMount() {
+  //   BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  // }
+  // componentWillUnmount() {
+  //   BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  // }
+  // onBackPress = () => {
+  //   return true;
+  // };
 
   render() {
     return (
