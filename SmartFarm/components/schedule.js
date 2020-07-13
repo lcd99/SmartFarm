@@ -632,6 +632,7 @@ export default class Schedule extends Component {
         <Footer>
           <FooterTab>
             <Button
+              full
               style={{backgroundColor: '#1fab89'}}
               active
               onPress={() => {
@@ -1123,6 +1124,7 @@ export default class Schedule extends Component {
               {/* </View> */}
             </Button>
             <Button
+            full
               active
               onPress={() => this.toggleEditItem()}
               style={{backgroundColor: '#1fab89'}}>
