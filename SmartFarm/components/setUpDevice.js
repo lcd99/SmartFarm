@@ -17,6 +17,7 @@ import websocket from './websocket.js';
 import wsDevice from './websocketDevice.js';
 import {Card} from 'react-native-shadow-cards';
 import logo from '../images/logoSF.png';
+//import logo from '../images/logo.png';
 import bg from '../images/bg.jpg';
 
 export default class SetupDevice extends Component {

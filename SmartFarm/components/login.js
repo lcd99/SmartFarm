@@ -23,6 +23,7 @@ import Toast from 'react-native-simple-toast';
 
 //import Home from './home.js';
 import logo from '../images/logoSF.png';
+//import logo from '../images/logo.jpg';
 import bg from '../images/bg.jpg';
 import websocket from './websocket.js';
 export default class Login extends Component {
@@ -68,7 +69,6 @@ export default class Login extends Component {
         password: this.state.password,
       },
     };
-
     websocket.send(JSON.stringify(actionLogin));
   };
 
@@ -97,37 +97,41 @@ export default class Login extends Component {
     }
   }
   componentDidMount() {
-    this.unReceive = websocket.receive(e => {
-      // console.log(e);
-
-      const data = JSON.parse(e.data);
-      //console.log(data.message);
-      if (data.action == 'DeviceSendDataServer') {
-        if (data.message == 'addDataDeviceSuccess') {
-          console.log('Thêm thành công thiết bị');
-          this.setState({spinner: !this.state.spinner});
-        } else {
-          console.log('Thêm thiết bị thất bại');
-          this.setState({spinner: !this.state.spinner});
-
-          this.AlertFailSetupDevice;
+    try {
+      this.unReceive = websocket.receive(e => {
+        // console.log(e);
+  
+        const data = JSON.parse(e.data);
+        //console.log(data.message);
+        if (data.action == 'DeviceSendDataServer') {
+          if (data.message == 'addDataDeviceSuccess') {
+            console.log('Thêm thành công thiết bị');
+            this.setState({spinner: !this.state.spinner});
+          } else {
+            console.log('Thêm thiết bị thất bại');
+            this.setState({spinner: !this.state.spinner});
+  
+            this.AlertFailSetupDevice;
+          }
+        } else if (data.action === 'login') {
+          if (data.message === 'Login success') {
+            //console.log(data.data);
+            this.setState({spinner: !this.state.spinner});
+  
+            this.props.navigation.navigate('Home', {
+              name: data.data.name,
+              username: data.data.username,
+              pass: this.state.password,
+            });
+          } else {
+            this.setState({spinner: !this.state.spinner});
+            alert(data.message);
+          }
         }
-      } else if (data.action === 'login') {
-        if (data.message === 'Login success') {
-          //console.log(data.data);
-          this.setState({spinner: !this.state.spinner});
-
-          this.props.navigation.navigate('Home', {
-            name: data.data.name,
-            username: data.data.username,
-            pass: this.state.password,
-          });
-        } else {
-          this.setState({spinner: !this.state.spinner});
-          alert(data.message);
-        }
-      }
-    });
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
@@ -188,7 +192,7 @@ export default class Login extends Component {
               rounded
               style={styles.btnLogin}
               onPress={() => this.props.navigation.navigate('SetUpDevice')}>
-              <Text>SETUP DEVICE</Text>
+              <Text>SETUP NEW DEVICE</Text>
             </Button>
           </Content>
         </ImageBackground>
@@ -221,8 +225,9 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: 145,
-    height: 170,
+     width: 145,
+     height: 170,
+     marginBottom: 0
   },
 
   textInput: {

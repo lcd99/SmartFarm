@@ -8,11 +8,12 @@ import {
   TextInput,
   ScrollView,
   FlatList,
-  Switch,
   SafeAreaView,
   TouchableHighlight,
   Animated,
   Alert,
+  ContentThatGoesAboveTheFlatList,
+  ContentThatGoesBelowTheFlatList,
 } from 'react-native';
 
 import {
@@ -33,11 +34,12 @@ import {
 } from 'native-base';
 
 //import ToggleSwitch from 'toggle-switch-react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+//import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import ToggleSwitch from 'rn-toggle-switch';
-import Swipeout from 'react-native-swipeout';
 import Dialog from 'react-native-dialog';
+
+import {Switch} from 'react-native-switch';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -120,6 +122,8 @@ export default class Schedule extends Component {
 
     iconAddSchedule: '',
     iconDeleteSchedule: '',
+
+    switchValue: true,
   };
 
   checkActiveIconFooter = () => {
@@ -296,17 +300,23 @@ export default class Schedule extends Component {
     });
   };
 
+  handleInputTextFloat = text => {
+    this.setState({
+      text: text.replace(/[^0-9\.]+/g, ''),
+    });
+  };
+
   addBalconyIrrigationSchedule = () => {
     //console.log(this.state.timeIrr);
 
-    //this.setState({spinner: !this.state.spinner});
+    this.setState({spinner: !this.state.spinner});
 
     try {
       if (this.state.timeIrr == true) {
         var addScheduleModeTime = {
           action: 'addScheduleModeTime',
           data: {
-            time: this.state.chosenTime, //
+            time: this.state.chosenTime,
             irrigationTime: this.state.irrigationTime,
             day: this.state.day.join(''),
             repeat: this.state.repeat,
@@ -330,18 +340,56 @@ export default class Schedule extends Component {
     }
   };
 
-  updateStatusSchedule(idSchedule, statusSchedule) {
+  setSwitchValue = (idSchedule, val, ind) => {
+    //this.setState({spinner: !this.state.spinner});
+
+    // const tempData = _.cloneDeep(this.state.dataSchedule);
+    const tempData = this.state.dataSchedule;
+
+    this.setState({dataSchedule: tempData});
+
     var updateStatus = {
       action: 'updateStatus',
       data: {
         id: idSchedule,
-        status: statusSchedule == 1 ? 0 : 1,
+        status: val == true ? 0 : 1,
       },
     };
 
-    //console.log(updateStatus);
     websocket.send(JSON.stringify(updateStatus));
-  }
+    if (val == false) tempData[ind].status = true;
+    else tempData[ind].status = false;
+
+    // this.unReceive = websocket.receive(e => {
+    //   const data = JSON.parse(e.data);
+    //   if (data.action == 'updateStatus') {
+    //     if (data.message == 'updateSuccess') {
+    //       console.log('updateSuccess');
+    //       if (val == false) tempData[ind].status = true;
+    //       else tempData[ind].status = false;
+    //       //this.setState({spinner: !this.state.spinner});
+    //     } else {
+    //       console.log('updateFail');
+    //       //this.setState({spinner: !this.state.spinner});
+    //     }
+    //   }
+    // });
+  };
+
+  // updateStatusSchedule(idSchedule, statusSchedule) {
+  //   //this.setState({spinner: !this.state.spinner});
+
+  //   var updateStatus = {
+  //     action: 'updateStatus',
+  //     data: {
+  //       id: idSchedule,
+  //       status: statusSchedule == 1 ? 0 : 1,
+  //     },
+  //   };
+
+  //   //console.log(updateStatus);
+  //   websocket.send(JSON.stringify(updateStatus));
+  // }
 
   showDialog = () => {
     if (this.state.selectedLists.length == 0) {
@@ -356,12 +404,10 @@ export default class Schedule extends Component {
   };
 
   handleDelete = () => {
-    // The user has pressed the "Delete" button, so here you can do your own logic.
-    // ...Your logic
     //this.setState({spinner: !this.state.spinner});
 
-    console.log('passInput: ', this.state.passInput);
-    console.log('pass: ', this.state.pass);
+    //console.log('passInput: ', this.state.passInput);
+    //console.log('pass: ', this.state.pass);
 
     if (this.state.passInput == this.state.pass) {
       var deleteSchedule = {
@@ -372,6 +418,7 @@ export default class Schedule extends Component {
       };
 
       websocket.send(JSON.stringify(deleteSchedule));
+      this.setState({spinner: !this.state.spinner});
     } else {
       alert('Mật khẩu không đúng!');
     }
@@ -424,7 +471,7 @@ export default class Schedule extends Component {
       selectedLists.pop(item.id);
     }
 
-    console.log(selectedLists);
+    //console.log(selectedLists);
   };
 
   renderItem = ({item, index}) => (
@@ -454,7 +501,7 @@ export default class Schedule extends Component {
           </Text>
         </Body>
         <Right>
-          <ToggleSwitch
+          {/* <ToggleSwitch
             text={{
               on: 'on',
               off: 'off',
@@ -469,14 +516,36 @@ export default class Schedule extends Component {
               activeBorder: '#00B300',
               inactiveBorder: '#FF0000',
             }}
-            active={item.status == 1 ? true : false}
-            //disabled={false}
+            active={item.status}
             width={25}
             radius={10}
-            onValueChange={() => {
-              //console.log(item.id, item.status);
-              this.updateStatusSchedule(item.id, item.status);
-            }}
+            onValueChange={() => this.setSwitchValue(item.status, index)}
+          /> */}
+          <Switch
+            value={item.status}
+            onValueChange={() =>
+              this.setSwitchValue(item.id, item.status, index)
+            }
+            //disabled={true}
+            // activeText={'On'}
+            // inActiveText={'Off'}
+            circleSize={26}
+            //barHeight={25}
+            //circleBorderWidth={1}
+            backgroundActive={'green'}
+            backgroundInactive={'red'}
+            // circleActiveColor={'#30a566'}
+            // circleInActiveColor={'#000000'}
+            changeValueImmediately={true}
+            changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
+            innerCircleStyle={{alignItems: 'center', justifyContent: 'center'}} // style for inner animated circle for what you (may) be rendering inside the circle
+            // outerCircleStyle={{}} // style for outer animated circle
+            renderActiveText={false}
+            renderInActiveText={false}
+            switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+            switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+            switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
+            //switchBorderRadius={10} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
           />
         </Right>
       </ListItem>
@@ -507,11 +576,6 @@ export default class Schedule extends Component {
     this.setState({isChecked: initialCheck});
   }
   componentDidMount() {
-    // setTimeout(() => {
-    //   this.setState({spinner: !this.state.spinner});
-    // }, 3000);
-
-    //this.setState({spinner: !this.state.spinner});
     try {
       var getScheduleIrr = {
         action: 'ClientGetScheduleIrr',
@@ -521,10 +585,24 @@ export default class Schedule extends Component {
         const data = JSON.parse(e.data);
 
         console.log(data.action);
-        //console.log(JSON.parse(data.message));
+
         if (data.action == 'getDataSchedule') {
-          const dataSchedule = JSON.parse(data.message);
+          const cvStatus = JSON.parse(data.message);
+
+          for (var i = 0; i < cvStatus.length; i++) {
+            if (cvStatus[i].status == 0) {
+              cvStatus[i].status = false;
+            } else {
+              cvStatus[i].status = true;
+            }
+          }
+
+          this.setState({spinner: !this.state.spinner});
+
+          const dataSchedule = cvStatus;
+
           this.setState({dataSchedule: dataSchedule});
+          this.setState({spinner: !this.state.spinner});
         }
         if (
           data.action == 'addScheduleModeTime' ||
@@ -533,31 +611,26 @@ export default class Schedule extends Component {
           if (data.message == 'addSchedule success') {
             console.log('Thêm thành công');
             this.setModalVisible(false);
-            //this.setState({spinner: !this.state.spinner});
+            this.setState({spinner: !this.state.spinner});
           } else {
             alert(data.message);
             console.log('Thêm thất bại');
+            this.setState({spinner: !this.state.spinner});
           }
         }
         if (data.action == 'deleteSchedule') {
           if (data.message == 'deleteSuccess') {
-            console.log('deleteSuccess');
+            //console.log('deleteSuccess');
             this.setState({dialogVisible: false});
 
             this.setState({isChecked: new Array()});
             this.setState({selectedLists: new Array()});
 
             this.setDataSchedule;
+            this.setState({spinner: !this.state.spinner});
           } else {
             console.log('deleteFail');
-          }
-        }
-        if (data.action == 'updateStatus') {
-          if (data.message == 'updateSuccess') {
-            console.log('updateSuccess');
-            this.setState({dialogVisible: false});
-          } else {
-            console.log('updateFail');
+            this.setState({spinner: !this.state.spinner});
           }
         }
       });
@@ -613,6 +686,8 @@ export default class Schedule extends Component {
               keyExtractor={item => item.id}
               renderItem={this.renderItem}
               refreshing={this.state.refreshData}
+              ListHeaderComponent={ContentThatGoesAboveTheFlatList}
+              ListFooterComponent={ContentThatGoesBelowTheFlatList}
               // onRefresh={this.handleRefresh}
             />
           </SafeAreaView>
@@ -648,7 +723,7 @@ export default class Schedule extends Component {
               <Form>
                 <View style={styles.centeredView}>
                   <Modal
-                    scrollHorizontal={true}
+                    //scrollHorizontal={true}
                     animationType="slide"
                     transparent={true}
                     visible={modalVisible}
@@ -721,7 +796,7 @@ export default class Schedule extends Component {
                           </View>
                         </View>
                         <Modal
-                          scrollHorizontal={true}
+                          //scrollHorizontal={true}
                           animationType="slide"
                           transparent={true}
                           visible={modalChoseDay}
@@ -729,163 +804,159 @@ export default class Schedule extends Component {
                             this.setModalVisibleChoseDay(!modalVisible);
                           }}>
                           <View style={styles.centeredViewChoseDay}>
-                            <ScrollView>
-                              <View style={styles.modalViewChoseDay}>
-                                <Text style={styles.modalTextSelectDay}>
-                                  Chọn ngày lặp
-                                </Text>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    this.setState({select2: !select2})
-                                  }>
-                                  <View style={styles.viewChoseDay}>
-                                    <Left>
-                                      <Text style={styles.txtDay}>Thứ 2</Text>
-                                    </Left>
-                                    <CheckBox
-                                      checked={select2}
-                                      color="#454545"
-                                      style={styles.cbSelectDay}
-                                      onPress={() =>
-                                        this.setState({select2: !select2})
-                                      }
-                                    />
-                                  </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    this.setState({select3: !select3})
-                                  }>
-                                  <View style={styles.viewChoseDay}>
-                                    <Left>
-                                      <Text style={styles.txtDay}>Thứ 3</Text>
-                                    </Left>
-                                    <CheckBox
-                                      checked={this.state.select3}
-                                      color="#454545"
-                                      onPress={() =>
-                                        this.setState({select3: !select3})
-                                      }
-                                      style={styles.cbSelectDay}
-                                    />
-                                  </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    this.setState({select4: !select4})
-                                  }>
-                                  <View style={styles.viewChoseDay}>
-                                    <Left>
-                                      <Text style={styles.txtDay}>Thứ 4</Text>
-                                    </Left>
-                                    <CheckBox
-                                      checked={this.state.select4}
-                                      color="#454545"
-                                      style={styles.cbSelectDay}
-                                      onPress={() =>
-                                        this.setState({select4: !select4})
-                                      }
-                                    />
-                                  </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    this.setState({select5: !select5})
-                                  }>
-                                  <View style={styles.viewChoseDay}>
-                                    <Left>
-                                      <Text style={styles.txtDay}>Thứ 5</Text>
-                                    </Left>
-                                    <CheckBox
-                                      checked={this.state.select5}
-                                      color="#454545"
-                                      style={styles.cbSelectDay}
-                                      onPress={() =>
-                                        this.setState({select5: !select5})
-                                      }
-                                    />
-                                  </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    this.setState({select6: !select6})
-                                  }>
-                                  <View style={styles.viewChoseDay}>
-                                    <Left>
-                                      <Text style={styles.txtDay}>Thứ 6</Text>
-                                    </Left>
-                                    <CheckBox
-                                      checked={this.state.select6}
-                                      color="#454545"
-                                      style={styles.cbSelectDay}
-                                      onPress={() =>
-                                        this.setState({select6: !select6})
-                                      }
-                                    />
-                                  </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    this.setState({select7: !select7})
-                                  }>
-                                  <View style={styles.viewChoseDay}>
-                                    <Left>
-                                      <Text style={styles.txtDay}>Thứ 7</Text>
-                                    </Left>
-                                    <CheckBox
-                                      checked={this.state.select7}
-                                      color="#454545"
-                                      style={styles.cbSelectDay}
-                                      onPress={() =>
-                                        this.setState({select7: !select7})
-                                      }
-                                    />
-                                  </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    this.setState({select1: !select1})
-                                  }>
-                                  <View style={styles.viewChoseDay}>
-                                    <Left>
-                                      <Text style={styles.txtDay}>
-                                        Chủ nhật
-                                      </Text>
-                                    </Left>
-                                    <CheckBox
-                                      checked={this.state.select1}
-                                      color="#454545"
-                                      style={styles.cbSelectDay}
-                                      onPress={() =>
-                                        this.setState({select1: !select1})
-                                      }
-                                    />
-                                  </View>
-                                </TouchableOpacity>
-                                <View style={styles.viewButton}>
-                                  <View style={styles.viewText}>
-                                    <TouchableOpacity
-                                      onPress={() => {
-                                        this.setModalVisibleChoseDay(
-                                          !modalChoseDay,
-                                        );
-                                      }}>
-                                      <Text style={styles.txtCancel}>HỦY</Text>
-                                    </TouchableOpacity>
-                                  </View>
-                                  <View style={styles.viewText}>
-                                    <TouchableOpacity
-                                      onPress={() => {
-                                        this.setConfirmSelectDay(
-                                          !modalChoseDay,
-                                        );
-                                      }}>
-                                      <Text style={styles.txtOK}>XÁC NHẬN</Text>
-                                    </TouchableOpacity>
-                                  </View>
+                            {/* <ScrollView> */}
+                            <View style={styles.modalViewChoseDay}>
+                              <Text style={styles.modalTextSelectDay}>
+                                Chọn ngày lặp
+                              </Text>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.setState({select2: !select2})
+                                }>
+                                <View style={styles.viewChoseDay}>
+                                  <Left>
+                                    <Text style={styles.txtDay}>Thứ 2</Text>
+                                  </Left>
+                                  <CheckBox
+                                    checked={select2}
+                                    color="#454545"
+                                    style={styles.cbSelectDay}
+                                    onPress={() =>
+                                      this.setState({select2: !select2})
+                                    }
+                                  />
+                                </View>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.setState({select3: !select3})
+                                }>
+                                <View style={styles.viewChoseDay}>
+                                  <Left>
+                                    <Text style={styles.txtDay}>Thứ 3</Text>
+                                  </Left>
+                                  <CheckBox
+                                    checked={this.state.select3}
+                                    color="#454545"
+                                    onPress={() =>
+                                      this.setState({select3: !select3})
+                                    }
+                                    style={styles.cbSelectDay}
+                                  />
+                                </View>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.setState({select4: !select4})
+                                }>
+                                <View style={styles.viewChoseDay}>
+                                  <Left>
+                                    <Text style={styles.txtDay}>Thứ 4</Text>
+                                  </Left>
+                                  <CheckBox
+                                    checked={this.state.select4}
+                                    color="#454545"
+                                    style={styles.cbSelectDay}
+                                    onPress={() =>
+                                      this.setState({select4: !select4})
+                                    }
+                                  />
+                                </View>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.setState({select5: !select5})
+                                }>
+                                <View style={styles.viewChoseDay}>
+                                  <Left>
+                                    <Text style={styles.txtDay}>Thứ 5</Text>
+                                  </Left>
+                                  <CheckBox
+                                    checked={this.state.select5}
+                                    color="#454545"
+                                    style={styles.cbSelectDay}
+                                    onPress={() =>
+                                      this.setState({select5: !select5})
+                                    }
+                                  />
+                                </View>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.setState({select6: !select6})
+                                }>
+                                <View style={styles.viewChoseDay}>
+                                  <Left>
+                                    <Text style={styles.txtDay}>Thứ 6</Text>
+                                  </Left>
+                                  <CheckBox
+                                    checked={this.state.select6}
+                                    color="#454545"
+                                    style={styles.cbSelectDay}
+                                    onPress={() =>
+                                      this.setState({select6: !select6})
+                                    }
+                                  />
+                                </View>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.setState({select7: !select7})
+                                }>
+                                <View style={styles.viewChoseDay}>
+                                  <Left>
+                                    <Text style={styles.txtDay}>Thứ 7</Text>
+                                  </Left>
+                                  <CheckBox
+                                    checked={this.state.select7}
+                                    color="#454545"
+                                    style={styles.cbSelectDay}
+                                    onPress={() =>
+                                      this.setState({select7: !select7})
+                                    }
+                                  />
+                                </View>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  this.setState({select1: !select1})
+                                }>
+                                <View style={styles.viewChoseDay}>
+                                  <Left>
+                                    <Text style={styles.txtDay}>Chủ nhật</Text>
+                                  </Left>
+                                  <CheckBox
+                                    checked={this.state.select1}
+                                    color="#454545"
+                                    style={styles.cbSelectDay}
+                                    onPress={() =>
+                                      this.setState({select1: !select1})
+                                    }
+                                  />
+                                </View>
+                              </TouchableOpacity>
+                              <View style={styles.viewButton}>
+                                <View style={styles.viewText}>
+                                  <TouchableOpacity
+                                    onPress={() => {
+                                      this.setModalVisibleChoseDay(
+                                        !modalChoseDay,
+                                      );
+                                    }}>
+                                    <Text style={styles.txtCancel}>HỦY</Text>
+                                  </TouchableOpacity>
+                                </View>
+                                <View style={styles.viewText}>
+                                  <TouchableOpacity
+                                    onPress={() => {
+                                      this.setConfirmSelectDay(!modalChoseDay);
+                                    }}>
+                                    <Text style={styles.txtOK}>XÁC NHẬN</Text>
+                                  </TouchableOpacity>
                                 </View>
                               </View>
-                            </ScrollView>
+                            </View>
+                            {/* </ScrollView> */}
                           </View>
                         </Modal>
                       </TouchableOpacity>
@@ -908,7 +979,7 @@ export default class Schedule extends Component {
                               style={styles.iconItemModal}
                             />
                             <Modal
-                              scrollHorizontal={true}
+                              //scrollHorizontal={true}
                               animationType="slide"
                               transparent={true}
                               visible={modalTime}
@@ -916,47 +987,45 @@ export default class Schedule extends Component {
                                 this.setModalVisibleTime(!modalVisible);
                               }}>
                               <View style={styles.centeredViewTime}>
-                                <ScrollView>
-                                  <View style={styles.modalViewTime}>
-                                    <Text style={styles.modalTextTime}>
-                                      Thời gian tưới (phút)
-                                    </Text>
-                                    <TextInput
-                                      style={styles.textInputTime}
-                                      placeholder="Nhập thời gian tưới (phút)"
-                                      underlineColorAndroid="transparent"
-                                      autoFocus={true}
-                                      placeholderStyle={{}}
-                                      keyboardType="numeric"
-                                      onChangeText={this.handleInputChange}
-                                      value={this.state.text}
-                                    />
-                                    <View style={styles.viewButton}>
-                                      <View style={styles.viewText}>
-                                        <TouchableOpacity
-                                          onPress={() => {
-                                            this.setModalVisibleTime(
-                                              !modalTime,
-                                            );
-                                          }}>
-                                          <Text style={styles.txtCancel}>
-                                            HỦY
-                                          </Text>
-                                        </TouchableOpacity>
-                                      </View>
-                                      <View style={styles.viewText}>
-                                        <TouchableOpacity
-                                          onPress={() => {
-                                            this.setConfirmTime(!modalTime);
-                                          }}>
-                                          <Text style={styles.txtOK}>
-                                            XÁC NHẬN
-                                          </Text>
-                                        </TouchableOpacity>
-                                      </View>
+                                {/* <ScrollView> */}
+                                <View style={styles.modalViewTime}>
+                                  <Text style={styles.modalTextTime}>
+                                    Thời gian tưới (phút)
+                                  </Text>
+                                  <TextInput
+                                    style={styles.textInputTime}
+                                    placeholder="Nhập thời gian tưới (phút)"
+                                    underlineColorAndroid="transparent"
+                                    autoFocus={true}
+                                    placeholderStyle={{}}
+                                    keyboardType="numeric"
+                                    onChangeText={this.handleInputChange}
+                                    value={this.state.text}
+                                  />
+                                  <View style={styles.viewButton}>
+                                    <View style={styles.viewText}>
+                                      <TouchableOpacity
+                                        onPress={() => {
+                                          this.setModalVisibleTime(!modalTime);
+                                        }}>
+                                        <Text style={styles.txtCancel}>
+                                          HỦY
+                                        </Text>
+                                      </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.viewText}>
+                                      <TouchableOpacity
+                                        onPress={() => {
+                                          this.setConfirmTime(!modalTime);
+                                        }}>
+                                        <Text style={styles.txtOK}>
+                                          XÁC NHẬN
+                                        </Text>
+                                      </TouchableOpacity>
                                     </View>
                                   </View>
-                                </ScrollView>
+                                </View>
+                                {/* </ScrollView> */}
                               </View>
                             </Modal>
                           </View>
@@ -982,7 +1051,7 @@ export default class Schedule extends Component {
                               style={styles.iconItemModal}
                             />
                             <Modal
-                              scrollHorizontal={true}
+                              //scrollHorizontal={true}
                               animationType="slide"
                               transparent={true}
                               visible={modalFlow}
@@ -990,47 +1059,44 @@ export default class Schedule extends Component {
                                 this.setModalVisibleFlow(!modalVisible);
                               }}>
                               <View style={styles.centeredViewTime}>
-                                <ScrollView>
-                                  <View style={styles.modalViewTime}>
-                                    <Text style={styles.modalTextTime}>
-                                      Lưu lượng tưới (lít)
-                                    </Text>
-                                    <TextInput
-                                      style={styles.textInputTime}
-                                      placeholder="Nhập lưu lượng tưới (lít)"
-                                      underlineColorAndroid="transparent"
-                                      autoFocus={true}
-                                      placeholderStyle={{}}
-                                      keyboardType="numeric"
-                                      onChangeText={this.handleInputChange}
-                                      value={this.state.text}
-                                    />
-                                    <View style={styles.viewButton}>
-                                      <View style={styles.viewText}>
-                                        <TouchableOpacity
-                                          onPress={() => {
-                                            this.setModalVisibleFlow(
-                                              !modalFlow,
-                                            );
-                                          }}>
-                                          <Text style={styles.txtCancel}>
-                                            HỦY
-                                          </Text>
-                                        </TouchableOpacity>
-                                      </View>
-                                      <View style={styles.viewText}>
-                                        <TouchableOpacity
-                                          onPress={() => {
-                                            this.setConfirmFlow(!modalFlow);
-                                          }}>
-                                          <Text style={styles.txtOK}>
-                                            XÁC NHẬN
-                                          </Text>
-                                        </TouchableOpacity>
-                                      </View>
+                                {/* <ScrollView> */}
+                                <View style={styles.modalViewTime}>
+                                  <Text style={styles.modalTextTime}>
+                                    Lưu lượng tưới (lít)
+                                  </Text>
+                                  <TextInput
+                                    style={styles.textInputTime}
+                                    placeholder="Nhập lưu lượng tưới (lít)"
+                                    underlineColorAndroid="transparent"
+                                    autoFocus={true}
+                                    keyboardType="numeric"
+                                    value={this.state.text}
+                                    onChangeText={this.handleInputTextFloat}
+                                  />
+                                  <View style={styles.viewButton}>
+                                    <View style={styles.viewText}>
+                                      <TouchableOpacity
+                                        onPress={() => {
+                                          this.setModalVisibleFlow(!modalFlow);
+                                        }}>
+                                        <Text style={styles.txtCancel}>
+                                          HỦY
+                                        </Text>
+                                      </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.viewText}>
+                                      <TouchableOpacity
+                                        onPress={() => {
+                                          this.setConfirmFlow(!modalFlow);
+                                        }}>
+                                        <Text style={styles.txtOK}>
+                                          XÁC NHẬN
+                                        </Text>
+                                      </TouchableOpacity>
                                     </View>
                                   </View>
-                                </ScrollView>
+                                </View>
+                                {/* </ScrollView> */}
                               </View>
                             </Modal>
                           </View>
@@ -1058,7 +1124,7 @@ export default class Schedule extends Component {
                               style={styles.iconItemModal}
                             />
                             <Modal
-                              scrollHorizontal={true}
+                              //scrollHorizontal={true}
                               animationType="slide"
                               transparent={true}
                               visible={modalModeIrr}
@@ -1066,35 +1132,35 @@ export default class Schedule extends Component {
                                 this.setModalModeIrr(!modalVisible);
                               }}>
                               <View style={styles.centeredViewTime}>
-                                <ScrollView>
-                                  <View style={styles.modalViewTime}>
-                                    <Text style={styles.modalTextTime}>
-                                      Chọn chế độ tưới
-                                    </Text>
-                                    <View style={styles.modeIrr}>
-                                      <TouchableOpacity
-                                        onPress={() => {
-                                          this.selectModeTime(!modalModeIrr);
-                                        }}>
-                                        <View style={styles.modeView}>
-                                          <Text style={styles.modeText}>
-                                            Tưới theo thời gian
-                                          </Text>
-                                        </View>
-                                      </TouchableOpacity>
-                                      <TouchableOpacity
-                                        onPress={() => {
-                                          this.selectModeFlow(!modalModeIrr);
-                                        }}>
-                                        <View style={styles.modeView}>
-                                          <Text style={styles.modeText}>
-                                            Tưới theo lưu lượng
-                                          </Text>
-                                        </View>
-                                      </TouchableOpacity>
-                                    </View>
+                                {/* <ScrollView> */}
+                                <View style={styles.modalViewTime}>
+                                  <Text style={styles.modalTextTime}>
+                                    Chọn chế độ tưới
+                                  </Text>
+                                  <View style={styles.modeIrr}>
+                                    <TouchableOpacity
+                                      onPress={() => {
+                                        this.selectModeTime(!modalModeIrr);
+                                      }}>
+                                      <View style={styles.modeView}>
+                                        <Text style={styles.modeText}>
+                                          Tưới theo thời gian
+                                        </Text>
+                                      </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                      onPress={() => {
+                                        this.selectModeFlow(!modalModeIrr);
+                                      }}>
+                                      <View style={styles.modeView}>
+                                        <Text style={styles.modeText}>
+                                          Tưới theo lưu lượng
+                                        </Text>
+                                      </View>
+                                    </TouchableOpacity>
                                   </View>
-                                </ScrollView>
+                                </View>
+                                {/* </ScrollView> */}
                               </View>
                             </Modal>
                           </View>
@@ -1124,7 +1190,7 @@ export default class Schedule extends Component {
               {/* </View> */}
             </Button>
             <Button
-            full
+              full
               active
               onPress={() => this.toggleEditItem()}
               style={{backgroundColor: '#1fab89'}}>
@@ -1217,7 +1283,7 @@ const styles = StyleSheet.create({
 
   iconHeaderModal: {
     color: '#454545',
-    marginTop: -10,
+    marginTop: -20,
   },
 
   modalOptions: {
