@@ -22,8 +22,8 @@ import NetInfo from '@react-native-community/netinfo';
 import Toast from 'react-native-simple-toast';
 
 //import Home from './home.js';
-import logo from '../images/logoSF.png';
-//import logo from '../images/logo.jpg';
+//import logo from '../images/logoSF.png';
+import logo from '../images/logo.png';
 import bg from '../images/bg.jpg';
 import websocket from './websocket.js';
 export default class Login extends Component {
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-     width: 145,
+     width: 220,
      height: 170,
      marginBottom: 0
   },
