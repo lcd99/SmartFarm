@@ -17,7 +17,8 @@ import websocket from './websocket.js';
 import wsDevice from './websocketDevice.js';
 import {Card} from 'react-native-shadow-cards';
 //import logo from '../images/logoSF.png';
-import logo from '../images/logo.png';
+//import logo from '../images/logo.png';
+import logo from '../images/logo.jpg';
 import bg from '../images/bg.jpg';
 
 export default class SetupDevice extends Component {
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
 
   logo: {
     width: 125,
-    height: 100,
+    height: 125,
   },
 
   inputView: {},

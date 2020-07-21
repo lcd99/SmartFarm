@@ -22,8 +22,8 @@ import NetInfo from '@react-native-community/netinfo';
 import Toast from 'react-native-simple-toast';
 
 //import Home from './home.js';
-//import logo from '../images/logoSF.png';
-import logo from '../images/logo.png';
+import logo from '../images/logo.jpg';
+//import logo from '../images/logo.png';
 import bg from '../images/bg.jpg';
 import websocket from './websocket.js';
 export default class Login extends Component {
@@ -100,7 +100,7 @@ export default class Login extends Component {
     try {
       this.unReceive = websocket.receive(e => {
         // console.log(e);
-  
+
         const data = JSON.parse(e.data);
         //console.log(data.message);
         if (data.action == 'DeviceSendDataServer') {
@@ -110,14 +110,14 @@ export default class Login extends Component {
           } else {
             console.log('Thêm thiết bị thất bại');
             this.setState({spinner: !this.state.spinner});
-  
+
             this.AlertFailSetupDevice;
           }
         } else if (data.action === 'login') {
           if (data.message === 'Login success') {
             //console.log(data.data);
             this.setState({spinner: !this.state.spinner});
-  
+
             this.props.navigation.navigate('Home', {
               name: data.data.name,
               username: data.data.username,
@@ -125,6 +125,7 @@ export default class Login extends Component {
             });
           } else {
             this.setState({spinner: !this.state.spinner});
+            // eslint-disable-next-line no-alert
             alert(data.message);
           }
         }
@@ -225,9 +226,9 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-     width: 220,
-     height: 170,
-     marginBottom: 0
+    width: 200,
+    height: 200,
+    marginBottom: 0,
   },
 
   textInput: {
