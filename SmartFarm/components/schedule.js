@@ -14,6 +14,7 @@ import {
   Alert,
   ContentThatGoesAboveTheFlatList,
   ContentThatGoesBelowTheFlatList,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import {
@@ -88,8 +89,9 @@ export default class Schedule extends Component {
     chosenTime: new Date().getHours() + ':' + new Date().getMinutes(),
 
     text: '',
-    irrigationTime: '30',
-    irrigationFlow: '2',
+    irrigationTime: '0',
+    irrigationFlow: '0',
+    irrigationMode: 'Tưới theo thời gian',
     day: new Array(),
     rangeDay: new Array(),
     repeat: '0',
@@ -124,6 +126,12 @@ export default class Schedule extends Component {
     iconDeleteSchedule: '',
 
     switchValue: true,
+    modalText: 'THÊM GIỜ TƯỚI',
+
+    AddSchedule: true,
+    idSchedule: '',
+    statusUpdate: '',
+    repeatUpdate: '',
   };
 
   checkActiveIconFooter = () => {
@@ -323,7 +331,7 @@ export default class Schedule extends Component {
           },
         };
         websocket.send(JSON.stringify(addScheduleModeTime));
-      } else if (this.state.flowIrr == true) {
+      } else {
         var addScheduleModeFlow = {
           action: 'addScheduleModeFlow',
           data: {
@@ -359,37 +367,7 @@ export default class Schedule extends Component {
     websocket.send(JSON.stringify(updateStatus));
     if (val == false) tempData[ind].status = true;
     else tempData[ind].status = false;
-
-    // this.unReceive = websocket.receive(e => {
-    //   const data = JSON.parse(e.data);
-    //   if (data.action == 'updateStatus') {
-    //     if (data.message == 'updateSuccess') {
-    //       console.log('updateSuccess');
-    //       if (val == false) tempData[ind].status = true;
-    //       else tempData[ind].status = false;
-    //       //this.setState({spinner: !this.state.spinner});
-    //     } else {
-    //       console.log('updateFail');
-    //       //this.setState({spinner: !this.state.spinner});
-    //     }
-    //   }
-    // });
   };
-
-  // updateStatusSchedule(idSchedule, statusSchedule) {
-  //   //this.setState({spinner: !this.state.spinner});
-
-  //   var updateStatus = {
-  //     action: 'updateStatus',
-  //     data: {
-  //       id: idSchedule,
-  //       status: statusSchedule == 1 ? 0 : 1,
-  //     },
-  //   };
-
-  //   //console.log(updateStatus);
-  //   websocket.send(JSON.stringify(updateStatus));
-  // }
 
   showDialog = () => {
     if (this.state.selectedLists.length == 0) {
@@ -474,81 +452,120 @@ export default class Schedule extends Component {
     //console.log(selectedLists);
   };
 
+  getScheduleById = idSchedule => {
+    this.setState({spinner: !this.state.spinner});
+    this.setState({AddSchedule: false});
+    this.setState({modalText: 'SỬA LỊCH TƯỚI'});
+    this.setState({idSchedule: idSchedule});
+    var getScheduleById = {
+      action: 'getScheduleById',
+      data: {
+        id: idSchedule,
+      },
+    };
+
+    websocket.send(JSON.stringify(getScheduleById));
+  };
+
+  updateSchedule = () => {
+    this.setState({spinner: !this.state.spinner});
+    try {
+    console.log('Chức năng sửa lịch');
+
+      if (this.state.timeIrr == true) {
+        var updateScheduleModeTime = {
+          action: 'updateScheduleModeTime',
+          data: {
+            id: this.state.idSchedule,
+            time: this.state.chosenTime,
+            irrigationTime: this.state.irrigationTime,
+            day: this.state.day.join(''),
+            repeat: this.state.repeat,
+            status: this.state.statusUpdate,
+          },
+        };
+        console.log(updateScheduleModeTime);
+        websocket.send(JSON.stringify(updateScheduleModeTime));
+      } else if (this.state.flowIrr == true) {
+        var updateScheduleModeFlow = {
+          action: 'updateScheduleModeFlow',
+          data: {
+            id: this.state.idSchedule,
+            time: this.state.chosenTime,
+            irrigationFlow: this.state.irrigationFlow,
+            day: this.state.day.join(''),
+            repeat: this.state.repeat,
+            status: this.state.statusUpdate,
+          },
+        };
+        console.log(updateScheduleModeFlow);
+        websocket.send(JSON.stringify(updateScheduleModeFlow));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   renderItem = ({item, index}) => (
     <View style={styles.item}>
-      <ListItem>
-        <Animated.View
-          style={{
-            opacity: this.state.controlOpacity,
-            width: this.state.controlWidth,
-          }}>
-          <CheckBox
-            color="red"
-            checked={this.state.isChecked[index]}
-            onPress={() => this.isIconCheckedOrNot(item, index)}
-          />
-        </Animated.View>
-        <Body>
-          <Text style={styles.txtTime}>{item.time}</Text>
-          <Text style={styles.txtMinute}>
-            {item.mode == '1'
-              ? 'Thời gian tưới: ' + item.irrigation_time + ' phút'
-              : 'Lưu lượng tưới: ' + item.irrigation_flow + ' lít'}
-          </Text>
+      <TouchableWithoutFeedback onPress={() => this.getScheduleById(item.id)}>
+        <ListItem>
+          <Animated.View
+            style={{
+              opacity: this.state.controlOpacity,
+              width: this.state.controlWidth,
+            }}>
+            <CheckBox
+              color="red"
+              checked={this.state.isChecked[index]}
+              onPress={() => this.isIconCheckedOrNot(item, index)}
+            />
+          </Animated.View>
+          <Body>
+            <Text style={styles.txtTime}>{item.time}</Text>
+            <Text style={styles.txtMinute}>
+              {item.mode == '1'
+                ? 'Thời gian tưới: ' + item.irrigation_time + ' phút'
+                : 'Lưu lượng tưới: ' + item.irrigation_flow + ' lít'}
+            </Text>
 
-          <Text style={styles.txtMinute}>
-            Ngày tưới: {this.loadDays(item.day)}
-          </Text>
-        </Body>
-        <Right>
-          {/* <ToggleSwitch
-            text={{
-              on: 'on',
-              off: 'off',
-              activeTextColor: '#000',
-              inactiveTextColor: '#000',
-            }}
-            textStyle={{fontWeight: '200'}}
-            color={{
-              indicator: 'white',
-              active: 'rgba(0, 181, 0, 1)',
-              inactive: 'rgba( 255, 0, 0, 1)',
-              activeBorder: '#00B300',
-              inactiveBorder: '#FF0000',
-            }}
-            active={item.status}
-            width={25}
-            radius={10}
-            onValueChange={() => this.setSwitchValue(item.status, index)}
-          /> */}
-          <Switch
-            value={item.status}
-            onValueChange={() =>
-              this.setSwitchValue(item.id, item.status, index)
-            }
-            //disabled={true}
-            // activeText={'On'}
-            // inActiveText={'Off'}
-            circleSize={26}
-            //barHeight={25}
-            //circleBorderWidth={1}
-            backgroundActive={'green'}
-            backgroundInactive={'red'}
-            // circleActiveColor={'#30a566'}
-            // circleInActiveColor={'#000000'}
-            changeValueImmediately={true}
-            changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-            innerCircleStyle={{alignItems: 'center', justifyContent: 'center'}} // style for inner animated circle for what you (may) be rendering inside the circle
-            // outerCircleStyle={{}} // style for outer animated circle
-            renderActiveText={false}
-            renderInActiveText={false}
-            switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-            switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-            switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
-            //switchBorderRadius={10} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
-          />
-        </Right>
-      </ListItem>
+            <Text style={styles.txtMinute}>
+              Ngày tưới: {this.loadDays(item.day)}
+            </Text>
+          </Body>
+          <Right>
+            <Switch
+              value={item.status}
+              onValueChange={() =>
+                this.setSwitchValue(item.id, item.status, index)
+              }
+              //disabled={true}
+              // activeText={'On'}
+              // inActiveText={'Off'}
+              circleSize={26}
+              //barHeight={25}
+              //circleBorderWidth={1}
+              backgroundActive={'green'}
+              backgroundInactive={'red'}
+              // circleActiveColor={'#30a566'}
+              // circleInActiveColor={'#000000'}
+              changeValueImmediately={true}
+              changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
+              innerCircleStyle={{
+                alignItems: 'center',
+                justifyContent: 'center',
+              }} // style for inner animated circle for what you (may) be rendering inside the circle
+              // outerCircleStyle={{}} // style for outer animated circle
+              renderActiveText={false}
+              renderInActiveText={false}
+              switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+              switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+              switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
+              //switchBorderRadius={10} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+            />
+          </Right>
+        </ListItem>
+      </TouchableWithoutFeedback>
     </View>
   );
 
@@ -585,6 +602,7 @@ export default class Schedule extends Component {
         const data = JSON.parse(e.data);
 
         console.log(data.action);
+        //this.setState({spinner: !this.state.spinner});
 
         if (data.action == 'getDataSchedule') {
           const cvStatus = JSON.parse(data.message);
@@ -597,13 +615,68 @@ export default class Schedule extends Component {
             }
           }
 
-          this.setState({spinner: !this.state.spinner});
-
           const dataSchedule = cvStatus;
 
           this.setState({dataSchedule: dataSchedule});
+          //this.setState({spinner: !this.state.spinner});
+        }
+
+        if (data.action == 'getScheduleById') {
+          const dtGetScheduleById = JSON.parse(data.message);
+          //console.log(dtGetScheduleById);
+
+          // var time = dtGetScheduleById[0].time;
+          // var day = parseInt(dtGetScheduleById[0].day)
+          // var irrigationTime = dtGetScheduleById[0].irrigationTime;
+
+          //console.log(dtGetScheduleById[0].day);
+          this.setState({repeatUpdate: dtGetScheduleById[0].repeat});
+
+          this.setState({
+            day: dtGetScheduleById[0].day
+              .toString(10)
+              .replace(/\D/g, '0')
+              .split('')
+              .map(Number),
+          });
+          this.setState({chosenTime: dtGetScheduleById[0].time});
+          this.setState({
+            rangeDay: this.loadDays(parseInt(dtGetScheduleById[0].day)),
+          });
+          this.setState({
+            irrigationTime: dtGetScheduleById[0].irrigation_time.toString(),
+          });
+          this.setState({
+            irrigationFlow: dtGetScheduleById[0].irrigation_flow.toString(),
+          });
+          this.setState({
+            timeIrr: dtGetScheduleById[0].mode == 1 ? true : false,
+          });
+          this.setState({
+            flowIrr: dtGetScheduleById[0].mode == 1 ? false : true,
+          });
+          this.setState({
+            selectRepeat: dtGetScheduleById[0].repeat == 1 ? true : false,
+          });
+          this.setState({statusUpdate: dtGetScheduleById[0].status});
+          this.setModalVisible(true);
           this.setState({spinner: !this.state.spinner});
         }
+        if (
+          data.action == 'updateScheduleModeTime' ||
+          data.action == 'updateScheduleModeFlow'
+        ) {
+          if (data.message == 'UpdateSchedule Success') {
+            console.log('Sửa thành công');
+            this.setModalVisible(false);
+            this.setState({spinner: !this.state.spinner});
+          } else {
+            alert(data.message);
+            console.log('Sửa thất bại');
+            this.setState({spinner: !this.state.spinner});
+          }
+        }
+
         if (
           data.action == 'addScheduleModeTime' ||
           data.action == 'addScheduleModeFlow'
@@ -712,6 +785,12 @@ export default class Schedule extends Component {
               active
               onPress={() => {
                 this.setModalVisible(true);
+                this.setState({AddSchedule: true});
+                this.setState({modalText: 'THÊM GIỜ TƯỚI'});
+                this.setState({rangeDay: ''});
+                this.setState({irrigationTime: '0'});
+                this.setState({irrigationFlow: '0'});
+                this.setState({selectRepeat: false});
               }}>
               <Icon
                 active
@@ -747,11 +826,15 @@ export default class Schedule extends Component {
                           </Button>
                         </TouchableOpacity>
                         <Text style={styles.modalText} center>
-                          THÊM GIỜ TƯỚI
+                          {this.state.modalText}
                         </Text>
                         <Button
                           transparent
-                          onPress={this.addBalconyIrrigationSchedule}>
+                          onPress={
+                            this.state.AddSchedule == true
+                              ? this.addBalconyIrrigationSchedule
+                              : this.updateSchedule
+                          }>
                           <Icon
                             size={35}
                             type="AntDesign"
@@ -1144,7 +1227,7 @@ export default class Schedule extends Component {
                                       }}>
                                       <View style={styles.modeView}>
                                         <Text style={styles.modeText}>
-                                          Tưới theo thời gian
+                                          {this.state.irrigationMode}
                                         </Text>
                                       </View>
                                     </TouchableOpacity>
@@ -1266,6 +1349,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     flexDirection: 'column',
     marginTop: 50,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
 
   modalHeader: {

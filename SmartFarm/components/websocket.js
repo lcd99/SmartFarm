@@ -6,8 +6,8 @@ class APIWebSocket {
   }
 
   connect() {
-    this.ws = new WebSocket('ws://45.124.87.133/api/ws');
-    //this.ws = new WebSocket('ws://192.168.1.2/api/ws');
+    //this.ws = new WebSocket('ws://45.124.87.133/api/ws');
+    this.ws = new WebSocket('ws://192.168.1.3/api/ws');
     this.ws.onopen = this.onopen.bind(this);
     this.ws.onmessage = this.onmessage.bind(this);
     this.ws.onerror = this.onerror.bind(this);
