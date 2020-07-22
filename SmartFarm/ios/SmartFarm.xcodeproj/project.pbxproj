@@ -12,11 +12,12 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* SmartFarmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SmartFarmTests.m */; };
 		2F41BBDB604AD6F9D243E002 /* libPods-SmartFarm-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CC3F7955712C753D67F06C /* libPods-SmartFarm-tvOS.a */; };
 		BC74635114BED9FD674BD4E8 /* libPods-SmartFarm-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1051470A053E8EBA483D546A /* libPods-SmartFarm-tvOSTests.a */; };
+		D7DC6DDF24C88327004AC875 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		D7DC6DE224C8835A004AC875 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		EE1C273C4AF632683B946FB9 /* libPods-SmartFarm-SmartFarmTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 261234E1F4D7BB94380ACF75 /* libPods-SmartFarm-SmartFarmTests.a */; };
 /* End PBXBuildFile section */
 
@@ -380,6 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7DC6DDF24C88327004AC875 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+				D7DC6DE224C8835A004AC875 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,11 +805,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = A775WBSF7N;
-=======
 				DEVELOPMENT_TEAM = 2G5WDR8F29;
->>>>>>> 55df075e87fdc35ae5c49fc03056f2d0b5ed3a18
 				INFOPLIST_FILE = SmartFarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
