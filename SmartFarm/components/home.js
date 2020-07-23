@@ -88,6 +88,7 @@ export default class Home extends Component {
                 onPress={() =>
                   this.props.navigation.navigate('Schedule', {
                     pass: this.state.pass,
+                    username: this.state.username,
                   })
                 }>
                 <Button transparent dark style={styles.btnFunction}>
