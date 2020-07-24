@@ -120,6 +120,7 @@ export default class Schedule extends Component {
 
     pass: this.props.route.params.pass,
     username: this.props.route.params.username,
+    nameDevice: this.props.route.params.nameDevice,
     showPass: true,
     press: false,
 
@@ -330,6 +331,7 @@ export default class Schedule extends Component {
             day: this.state.day.join(''),
             repeat: this.state.repeat,
             username: this.state.username,
+            nameDevice: this.state.nameDevice,
           },
         };
         websocket.send(JSON.stringify(addScheduleModeTime));
@@ -342,6 +344,7 @@ export default class Schedule extends Component {
             day: this.state.day.join(''),
             repeat: this.state.repeat,
             username: this.state.username,
+            nameDevice: this.state.nameDevice,
           },
         };
         websocket.send(JSON.stringify(addScheduleModeFlow));
@@ -364,8 +367,10 @@ export default class Schedule extends Component {
       data: {
         id: idSchedule,
         status: val == true ? 0 : 1,
+        nameDevice: this.state.nameDevice,
       },
     };
+    console.log(JSON.stringify(updateStatus));
 
     websocket.send(JSON.stringify(updateStatus));
     if (val == false) tempData[ind].status = true;
@@ -396,6 +401,7 @@ export default class Schedule extends Component {
         data: {
           id: this.state.selectedLists,
           username: this.state.username,
+          nameDevice: this.state.nameDevice,
         },
       };
 
@@ -487,6 +493,7 @@ export default class Schedule extends Component {
             repeat: this.state.repeat,
             status: this.state.statusUpdate,
             username: this.state.username,
+            nameDevice: this.state.nameDevice,
           },
         };
         console.log(updateScheduleModeTime);
@@ -502,6 +509,7 @@ export default class Schedule extends Component {
             repeat: this.state.repeat,
             status: this.state.statusUpdate,
             username: this.state.username,
+            nameDevice: this.state.nameDevice,
           },
         };
         console.log(updateScheduleModeFlow);
@@ -581,6 +589,7 @@ export default class Schedule extends Component {
         action: 'ClientGetScheduleIrr',
         data: {
           username: this.state.username,
+          nameDevice: this.state.nameDevice,
         },
       };
       websocket.send(JSON.stringify(getScheduleIrr));
@@ -607,8 +616,10 @@ export default class Schedule extends Component {
         action: 'ClientGetScheduleIrr',
         data: {
           username: this.state.username,
+          nameDevice: this.state.nameDevice,
         },
       };
+
       websocket.send(JSON.stringify(getScheduleIrr));
       this.unReceive = websocket.receive(e => {
         const data = JSON.parse(e.data);

@@ -43,6 +43,7 @@ class SmartFarm extends Component {
       const {name} = route.params;
       const {username} = route.params;
       const {pass} = route.params;
+      const {nameDevice} = route.params;
       //console.log(JSON.stringify(dataUser));
       return (
         <Tab.Navigator
@@ -73,6 +74,7 @@ class SmartFarm extends Component {
               name: name,
               username: username,
               pass: pass,
+              nameDevice: nameDevice,
             }}
           />
           <Tab.Screen
