@@ -119,6 +119,7 @@ export default class SetupDevice extends Component {
                 <TextInput
                   placeholder="Nhập tài khoản"
                   underlineColorAndroid="transparent"
+                  placeholderTextColor="#454545"
                   style={styles.txtInput}
                   onChangeText={text => this.setState({username: text})}
                   value={username}
@@ -129,6 +130,7 @@ export default class SetupDevice extends Component {
                 <TextInput
                   placeholder="Nhập mật khẩu"
                   underlineColorAndroid="transparent"
+                  placeholderTextColor="#454545"
                   style={styles.txtInput}
                   onChangeText={text => this.setState({pass: text})}
                   value={pass}
@@ -139,6 +141,7 @@ export default class SetupDevice extends Component {
                 <TextInput
                   placeholder="Nhập SSID"
                   underlineColorAndroid="transparent"
+                  placeholderTextColor="#454545"
                   style={styles.txtInput}
                   onChangeText={text => this.setState({ssidWifi: text})}
                   value={ssidWifi}
@@ -149,6 +152,7 @@ export default class SetupDevice extends Component {
                 <TextInput
                   placeholder="Nhập mật khẩu wifi"
                   underlineColorAndroid="transparent"
+                  placeholderTextColor="#454545"
                   style={styles.txtInput}
                   onChangeText={text => this.setState({passWifi: text})}
                   value={passWifi}
@@ -183,10 +187,12 @@ const styles = StyleSheet.create({
     height: 125,
   },
 
-  inputView: {},
+  inputView: {
+  },
 
   textInput: {
     fontSize: 18,
+    color: '#000',
   },
 
   txtInput: {

@@ -191,7 +191,7 @@ export default class Login extends Component {
               </TouchableOpacity>
             </InputGroup>
             <Button full rounded style={styles.btnLogin} onPress={this.login}>
-              <Text>Login</Text>
+              <Text>LOGIN</Text>
             </Button>
             <Button
               full
