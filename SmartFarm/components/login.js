@@ -115,13 +115,15 @@ export default class Login extends Component {
           }
         } else if (data.action === 'login') {
           if (data.message === 'Login success') {
-            //console.log(data.data);
+            //console.log('LOGIN success:  ',data.data.nameDevice);
+            //this.setState({nameDevice: data.data.nameDevice});
             this.setState({spinner: !this.state.spinner});
 
             this.props.navigation.navigate('Home', {
               name: data.data.name,
               username: data.data.username,
               pass: this.state.password,
+              nameDevice: data.data.nameDevice,
             });
           } else {
             this.setState({spinner: !this.state.spinner});

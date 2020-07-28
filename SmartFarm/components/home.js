@@ -35,16 +35,15 @@ export default class Home extends Component {
       name: this.props.route.params.name,
       username: this.props.route.params.username,
       pass: this.props.route.params.pass,
+      nameDevice: this.props.route.params.nameDevice,
     };
   }
 
-  log = () => {
-    console.log('test');
-  };
 
-  // componentDidMount() {
-  //   BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
-  // }
+  componentDidMount() {
+
+    //BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
   // componentWillUnmount() {
   //   BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   // }
@@ -88,6 +87,8 @@ export default class Home extends Component {
                 onPress={() =>
                   this.props.navigation.navigate('Schedule', {
                     pass: this.state.pass,
+                    username: this.state.username,
+                    nameDevice: this.state.nameDevice,
                   })
                 }>
                 <Button transparent dark style={styles.btnFunction}>
