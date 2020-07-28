@@ -36,6 +36,10 @@ export default class Login extends Component {
 
       username: '',
       password: '',
+
+      // username: 'admin01',
+      // password: '12345',
+
       spinner: false,
     };
     NetInfo.fetch().then(state => {
@@ -110,7 +114,6 @@ export default class Login extends Component {
           } else {
             console.log('Thêm thiết bị thất bại');
             this.setState({spinner: !this.state.spinner});
-
             this.AlertFailSetupDevice;
           }
         } else if (data.action === 'login') {
