@@ -1103,6 +1103,7 @@ export default class Schedule extends Component {
                                     style={styles.textInputTime}
                                     placeholder="Nhập thời gian tưới (phút)"
                                     underlineColorAndroid="transparent"
+                                    placeholderTextColor="#454545"
                                     autoFocus={true}
                                     placeholderStyle={{}}
                                     keyboardType="numeric"
@@ -1175,6 +1176,7 @@ export default class Schedule extends Component {
                                     style={styles.textInputTime}
                                     placeholder="Nhập lưu lượng tưới (lít)"
                                     underlineColorAndroid="transparent"
+                                    placeholderTextColor="#454545"
                                     autoFocus={true}
                                     keyboardType="numeric"
                                     value={this.state.text}
@@ -1475,6 +1477,7 @@ const styles = StyleSheet.create({
     borderColor: '#454545',
     borderBottomWidth: 1,
     fontSize: 16,
+    color: '#000',
   },
 
   modalTextTime: {
@@ -1482,6 +1485,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontSize: 18,
     fontWeight: 'bold',
+    height: 30,
   },
 
   //modal chọn ngày
