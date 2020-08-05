@@ -39,9 +39,7 @@ export default class Home extends Component {
     };
   }
 
-
   componentDidMount() {
-
     //BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   // componentWillUnmount() {
@@ -98,7 +96,11 @@ export default class Home extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() =>
-                  this.props.navigation.navigate('HistorySchedule')
+                  this.props.navigation.navigate('HistorySchedule', {
+                    pass: this.state.pass,
+                    username: this.state.username,
+                    nameDevice: this.state.nameDevice,
+                  })
                 }>
                 <Button transparent dark style={styles.btnFunction}>
                   <Text style={styles.txtFunction}>Xem lịch sử tưới</Text>
@@ -106,7 +108,13 @@ export default class Home extends Component {
                 </Button>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('Statistics')}>
+                onPress={() =>
+                  this.props.navigation.navigate('Statistics', {
+                    pass: this.state.pass,
+                    username: this.state.username,
+                    nameDevice: this.state.nameDevice,
+                  })
+                }>
                 <Button transparent dark style={styles.btnFunction}>
                   <Text style={styles.txtFunction}>Thống kê</Text>
                   <Icon type="Ionicons" name="bar-chart" />

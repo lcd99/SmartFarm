@@ -86,7 +86,8 @@ export default class Schedule extends Component {
 
     isPickerVisible: false,
 
-    chosenTime: new Date().getHours() + ':' + new Date().getMinutes(),
+    //chosenTime: new Date().getHours() + ':' + new Date().getMinutes(),
+    chosenTime: moment(new Date).format('HH:mm'),
 
     text: '',
     irrigationTime: '0',
@@ -320,6 +321,7 @@ export default class Schedule extends Component {
     //console.log(this.state.timeIrr);
 
     this.setState({spinner: !this.state.spinner});
+
 
     try {
       if (this.state.timeIrr == true) {
@@ -619,7 +621,6 @@ export default class Schedule extends Component {
           nameDevice: this.state.nameDevice,
         },
       };
-
       websocket.send(JSON.stringify(getScheduleIrr));
       this.unReceive = websocket.receive(e => {
         const data = JSON.parse(e.data);
@@ -734,6 +735,7 @@ export default class Schedule extends Component {
     } catch (error) {
       console.log(error);
     }
+
   }
 
   render() {

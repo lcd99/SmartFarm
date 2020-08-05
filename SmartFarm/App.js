@@ -26,6 +26,7 @@ import AccountManagement from './components/AccountManagement.js';
 import HistorySchedule from './components/historySchedule.js';
 import Statistics from './components/statistical.js';
 
+
 //const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,6 +83,12 @@ class SmartFarm extends Component {
             component={Profile}
             options={{
               title: 'Thông tin cá nhân',
+            }}
+            initialParams={{
+              name: name,
+              username: username,
+              pass: pass,
+              nameDevice: nameDevice,
             }}
           />
         </Tab.Navigator>
