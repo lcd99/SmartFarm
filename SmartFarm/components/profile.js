@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Modal,
 } from 'react-native';
 import {
   Container,
@@ -50,8 +51,25 @@ export default class AccountManagement extends Component {
       addressUpdate: '',
       passwordUpdate: '',
       imgUpdate: '',
+
+      passOldValue: '',
+      passNewValue: '',
+      passUpdate: '',
+
+      modalVisible: false,
+
+      pressOldPass: false,
+      pressNewPass: false,
+      pressPassUpdate: false,
+      showOldPass: true,
+      showNewPass: true,
+      showPassUpdate: true,
     };
   }
+
+  setModalVisible = visible => {
+    this.setState({modalVisible: visible});
+  };
 
   _isUpdateClick = () => {
     this.setState({isUpdate: !this.state.isUpdate});
@@ -70,6 +88,73 @@ export default class AccountManagement extends Component {
     }
   };
 
+  showOldPass = () => {
+    if (this.state.pressOldPass == false) {
+      this.setState({showOldPass: false, pressOldPass: true});
+    } else {
+      this.setState({showOldPass: true, pressOldPass: false});
+    }
+  };
+
+  showNewPass = () => {
+    if (this.state.pressNewPass == false) {
+      this.setState({showNewPass: false, pressNewPass: true});
+    } else {
+      this.setState({showNewPass: true, pressNewPass: false});
+    }
+  };
+
+  showPassUpdate = () => {
+    if (this.state.pressPassUpdate == false) {
+      this.setState({showPassUpdate: false, pressPassUpdate: true});
+    } else {
+      this.setState({showPassUpdate: true, pressPassUpdate: false});
+    }
+  };
+
+  setConfirmChangePass = () => {
+    if (
+      this.state.passOldValue == '' ||
+      this.state.passNewValue == '' ||
+      this.state.passUpdate == ''
+    ) {
+      Alert.alert('Thông báo', 'Vui lòng nhập đầy đủ', [
+        {
+          text: 'OK',
+          onPress: () => null,
+          style: 'cancel',
+        },
+      ]);
+    } else if (this.state.passOldValue != this.state.pass) {
+      Alert.alert('Thông báo', 'Mật khẩu cũ không đúng', [
+        {
+          text: 'Nhập lại',
+          onPress: () => null,
+          style: 'cancel',
+        },
+      ]);
+      this.setState({passOldValue: ''});
+    } else if (this.state.passNewValue != this.state.passUpdate) {
+      Alert.alert('Thông báo', 'Mật khẩu mới và nhập lại mật khẩu không khớp', [
+        {
+          text: 'Nhập lại',
+          onPress: () => null,
+          style: 'cancel',
+        },
+      ]);
+      this.setState({passNewValue: '', passUpdate: ''});
+    } else {
+      var changePassUserBalcony = {
+        action: 'changePassUserBalcony',
+        data: {
+          username: this.state.username,
+          pass: this.state.passUpdate,
+        },
+      };
+      websocket.send(JSON.stringify(changePassUserBalcony));
+    }
+  };
+
   componentDidMount() {
     try {
       var getInfoUserBalcony = {
@@ -82,7 +167,29 @@ export default class AccountManagement extends Component {
 
       this.unReceive = websocket.receive(e => {
         const data = JSON.parse(e.data);
-
+        if (data.action == 'changePassUserBalcony') {
+          if (data.message == 'UpdatePass Success') {
+            Alert.alert(
+              'Thông báo',
+              'Đổi mật khẩu thành công \nĐăng nhập lại để tiếp tục sử dụng',
+              [
+                {
+                  text: 'OK',
+                  onPress: () => this.props.navigation.navigate('Login'),
+                  style: 'cancel',
+                },
+              ],
+            );
+          } else {
+            Alert.alert('Thông báo', 'Đổi mật khẩu thất bại', [
+              {
+                text: 'OK',
+                onPress: () => null,
+                style: 'cancel',
+              },
+            ]);
+          }
+        }
         if (data.action == 'getInfoUserBalcony') {
           const dtUser = data.data;
 
@@ -103,9 +210,13 @@ export default class AccountManagement extends Component {
             );
             this.setState({name: this.state.nameUpdate});
             this.setState({isUpdate: false});
+          } else {
+            Toast.showWithGravity(
+              'Sửa thông tin cá nhân thất bại',
+              Toast.LONG,
+              Toast.TOP,
+            );
           }
-        } else {
-          console.log(data.message);
         }
       });
     } catch (error) {
@@ -117,18 +228,21 @@ export default class AccountManagement extends Component {
     return (
       <Container>
         {this.state.isUpdate == true && (
-          <Header>
+          <Header style={{backgroundColor: '#fff'}}>
             <Left>
-              <TouchableOpacity onPress={() => this.setState({isUpdate: false})}>
+              <TouchableOpacity
+                onPress={() => this.setState({isUpdate: false})}>
                 <Icon
                   name="angle-left"
                   type="FontAwesome"
-                  style={{fontSize: 30, color: '#fff', paddingHorizontal: 10}}
+                  style={{fontSize: 30, color: '#000', paddingHorizontal: 10}}
                 />
               </TouchableOpacity>
             </Left>
             <Body>
-              <Title>Cập nhật thông tin</Title>
+              <Title style={{color: '#000', fontWeight: 'bold'}}>
+                Cập nhật thông tin
+              </Title>
             </Body>
             <Right />
           </Header>
@@ -186,7 +300,15 @@ export default class AccountManagement extends Component {
                     />
                     <Text style={styles.txtSubTitle}>EMAIL</Text>
                   </View>
-                  <Text style={styles.txtInfoUser}>
+                  <Text
+                    style={{
+                      flex: 1,
+                      flexWrap: 'wrap',
+                      marginLeft: 50,
+                      fontStyle: 'italic',
+                      fontSize: 16,
+                      color: '#454545',
+                    }}>
                     {this.state.emailUpdate}
                   </Text>
                 </View>
@@ -222,7 +344,10 @@ export default class AccountManagement extends Component {
                   </View>
                   <View style={styles.viewLeftInfoUser}>
                     <Text style={styles.txtPassword}>**********</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.setModalVisible(true);
+                      }}>
                       <Icon
                         name="account-edit"
                         type="MaterialCommunityIcons"
@@ -241,6 +366,7 @@ export default class AccountManagement extends Component {
                     style={styles.textInput}
                     onChangeText={value => this.setState({nameUpdate: value})}
                     value={this.state.nameUpdate}
+                    underlineColorAndroid='transparent'
                   />
                 </View>
                 <View style={styles.formUpdate}>
@@ -294,6 +420,112 @@ export default class AccountManagement extends Component {
             </Text>
           </View>
         </TouchableOpacity>
+
+        <Modal
+          //scrollHorizontal={true}
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            this.setModalVisible(!this.state.modalVisible);
+          }}>
+          <View style={styles.modalView}>
+            <View style={styles.modalCenterView}>
+              <Text style={styles.titleChangePass}>Đổi mật khẩu</Text>
+              <View style={styles.formUpdatePass}>
+                <Text style={styles.titleUpdate}>MẬT KHẨU CŨ</Text>
+                <View style={styles.inInput}>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={value => this.setState({passOldValue: value})}
+                    value={this.state.passOldValue}
+                    secureTextEntry={this.state.showOldPass}
+                  />
+                  <TouchableOpacity
+                    styles={styles.inputIconEye}
+                    onPress={this.showOldPass.bind(this)}>
+                    <Icon
+                      type="Ionicons"
+                      name={
+                        this.state.pressOldPass == false
+                          ? 'ios-eye'
+                          : 'ios-eye-off'
+                      }
+                      style={styles.inputIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.formUpdatePass}>
+                <Text style={styles.titleUpdate}>MẬT KHẨU MỚI</Text>
+                <View style={styles.inInput}>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={value => this.setState({passNewValue: value})}
+                    value={this.state.passNewValue}
+                    secureTextEntry={this.state.showNewPass}
+                  />
+                  <TouchableOpacity
+                    styles={styles.inputIconEye}
+                    onPress={this.showNewPass.bind(this)}>
+                    <Icon
+                      type="Ionicons"
+                      name={
+                        this.state.pressNewPass == false
+                          ? 'ios-eye'
+                          : 'ios-eye-off'
+                      }
+                      style={styles.inputIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.formUpdatePass}>
+                <Text style={styles.titleUpdate}>NHẬP LẠI MẬT KHẨU MỚI</Text>
+                <View style={styles.inInput}>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={value => this.setState({passUpdate: value})}
+                    value={this.state.passUpdate}
+                    secureTextEntry={this.state.showPassUpdate}
+                  />
+                  <TouchableOpacity
+                    styles={styles.inputIconEye}
+                    onPress={this.showPassUpdate.bind(this)}>
+                    <Icon
+                      type="Ionicons"
+                      name={
+                        this.state.pressPassUpdate == false
+                          ? 'ios-eye'
+                          : 'ios-eye-off'
+                      }
+                      style={styles.inputIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View style={styles.viewButton}>
+                <View style={styles.viewText}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setModalVisible(!this.state.modalVisible);
+                    }}>
+                    <Text style={styles.txtCancel}>HỦY</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.viewText}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setConfirmChangePass(!this.state.modalVisible);
+                    }}>
+                    <Text style={styles.txtOK}>XÁC NHẬN</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </Container>
     );
   }
@@ -360,6 +592,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     fontSize: 16,
     color: '#454545',
+    //flexWrap: 'wrap'
   },
 
   txtPassword: {
@@ -394,7 +627,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     borderRadius: 5,
     alignItems: 'center',
-    marginBottom: 10,
+    //marginBottom: 10,
+    marginHorizontal: 10,
   },
 
   txtUpdateProfile: {
@@ -418,6 +652,97 @@ const styles = StyleSheet.create({
     marginTop: 5,
     paddingLeft: 10,
     fontSize: 18,
-    backgroundColor: 'rgba(5,165,209,0.1)',
+    //backgroundColor: 'rgba(5,165,209,0.1)',
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+
+  modalView: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
+
+  modalCenterView: {
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    elevation: 5,
+    flexDirection: 'column',
+    marginHorizontal: 20,
+    // borderTopLeftRadius: 20,
+    // borderTopRightRadius: 20,
+    borderRadius: 20,
+    marginTop: 50,
+  },
+
+  titleChangePass: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+
+  formUpdatePass: {
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
+
+  viewButton: {
+    marginTop: 20,
+    flexDirection: 'row',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  viewText: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    paddingBottom: 10,
+  },
+
+  txtCancel: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+
+  txtOK: {
+    color: 'green',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+
+  inInput: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+
+  inputIcon: {
+    padding: 10,
+    borderTopWidth: 0.7,
+    borderRightWidth: 0.7,
+    borderBottomWidth: 0.7,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderColor: '#424242',
+  },
+
+  input: {
+    flex: 1,
+    backgroundColor: '#fff',
+    color: '#000',
+    paddingLeft: 10,
+    borderTopWidth: 0.7,
+    borderLeftWidth: 0.7,
+    borderBottomWidth: 0.7,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderColor: '#424242',
   },
 });
