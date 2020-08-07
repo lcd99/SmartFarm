@@ -26,6 +26,8 @@ import logo from '../images/logo.jpg';
 //import logo from '../images/logo.png';
 import bg from '../images/bg.jpg';
 import websocket from './websocket.js';
+import Loading from './Loading.js';
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -34,8 +36,8 @@ export default class Login extends Component {
       showPass: true,
       press: false,
 
-      username: '',
-      password: '',
+      username: 'admin01',
+      password: '12345',
 
       // username: 'admin01',
       // password: '12345',
@@ -64,16 +66,28 @@ export default class Login extends Component {
   };
 
   login = () => {
-    this.setState({spinner: !this.state.spinner});
+    NetInfo.fetch().then(state => {
+      // console.log('Connection type', state.type);
+      // console.log('Is connected?', state.isConnected);
 
-    var actionLogin = {
-      action: 'login', //EnumConst.LOGIN
-      data: {
-        username: this.state.username,
-        password: this.state.password,
-      },
-    };
-    websocket.send(JSON.stringify(actionLogin));
+      if (!state.isConnected) {
+        Toast.show(
+          'Vui lòng kiểm tra lại internet để tiếp tục sử dụng.',
+          Toast.LONG,
+        );
+      } else {
+        this.setState({spinner: !this.state.spinner});
+
+        var actionLogin = {
+          action: 'login', //EnumConst.LOGIN
+          data: {
+            username: this.state.username,
+            password: this.state.password,
+          },
+        };
+        websocket.send(JSON.stringify(actionLogin));
+      }
+    });
   };
 
   AlertFailSetupDevice = () => {
@@ -131,12 +145,30 @@ export default class Login extends Component {
           } else {
             this.setState({spinner: !this.state.spinner});
             // eslint-disable-next-line no-alert
-            alert(data.message);
+            Alert.alert(
+              'Thông báo',
+              'Vui lòng kiểm tra lại tài khoản và mật khẩu',
+              [
+                {
+                  text: 'OK',
+                  onPress: () => null,
+                  style: 'cancel',
+                },
+              ],
+            );
           }
         }
       });
     } catch (error) {
       console.log(error);
+      this.setState({spinner: !this.state.spinner});
+      Alert.alert('Thông báo', 'Vui lòng kiểm tra lại internet', [
+        {
+          text: 'OK',
+          onPress: () => null,
+          style: 'cancel',
+        },
+      ]);
     }
   }
 
@@ -144,9 +176,17 @@ export default class Login extends Component {
     const {username, password} = this.state;
     return (
       <Container>
+        {/* <Loading></Loading> */}
+
         <Spinner visible={this.state.spinner} textContent={'Loading...'} />
         <ImageBackground source={bg} style={styles.backgroundContainer}>
-          <Content contentContainerStyle={{justifyContent: 'center', flex: 1}}>
+          <Content
+            contentContainerStyle={{
+              justifyContent: 'center',
+              flex: 1,
+              fontFamily: 'Montserrat',
+            }}>
+            {/* {this.state.spinner && <Loading />} */}
             <View style={styles.logoContainer}>
               <Image source={logo} style={styles.logo} />
             </View>

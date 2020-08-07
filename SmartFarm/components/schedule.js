@@ -86,7 +86,8 @@ export default class Schedule extends Component {
 
     isPickerVisible: false,
 
-    chosenTime: new Date().getHours() + ':' + new Date().getMinutes(),
+    //chosenTime: new Date().getHours() + ':' + new Date().getMinutes(),
+    chosenTime: moment(new Date).format('HH:mm'),
 
     text: '',
     irrigationTime: '0',
@@ -321,6 +322,7 @@ export default class Schedule extends Component {
 
     this.setState({spinner: !this.state.spinner});
 
+
     try {
       if (this.state.timeIrr == true) {
         var addScheduleModeTime = {
@@ -480,7 +482,7 @@ export default class Schedule extends Component {
   updateSchedule = () => {
     this.setState({spinner: !this.state.spinner});
     try {
-      console.log('Chức năng sửa lịch');
+      //console.log('Chức năng sửa lịch');
 
       if (this.state.timeIrr == true) {
         var updateScheduleModeTime = {
@@ -496,7 +498,7 @@ export default class Schedule extends Component {
             nameDevice: this.state.nameDevice,
           },
         };
-        console.log(updateScheduleModeTime);
+        //console.log(updateScheduleModeTime);
         websocket.send(JSON.stringify(updateScheduleModeTime));
       } else if (this.state.flowIrr == true) {
         var updateScheduleModeFlow = {
@@ -512,7 +514,7 @@ export default class Schedule extends Component {
             nameDevice: this.state.nameDevice,
           },
         };
-        console.log(updateScheduleModeFlow);
+        //console.log(updateScheduleModeFlow);
         websocket.send(JSON.stringify(updateScheduleModeFlow));
       }
     } catch (error) {
@@ -556,13 +558,11 @@ export default class Schedule extends Component {
               //disabled={true}
               // activeText={'On'}
               // inActiveText={'Off'}
-              circleSize={26}
-              //barHeight={25}
-              //circleBorderWidth={1}
+              circleSize={24}
+              barHeight={28}
+              circleBorderWidth={0}
               backgroundActive={'green'}
-              backgroundInactive={'red'}
-              // circleActiveColor={'#30a566'}
-              // circleInActiveColor={'#000000'}
+              backgroundInactive={'gray'}
               changeValueImmediately={true}
               changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
               innerCircleStyle={{
@@ -572,8 +572,8 @@ export default class Schedule extends Component {
               // outerCircleStyle={{}} // style for outer animated circle
               renderActiveText={false}
               renderInActiveText={false}
-              switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-              switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+              switchLeftPx={2.5} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+              switchRightPx={2.5} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
               switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
               //switchBorderRadius={10} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
             />
@@ -619,7 +619,6 @@ export default class Schedule extends Component {
           nameDevice: this.state.nameDevice,
         },
       };
-
       websocket.send(JSON.stringify(getScheduleIrr));
       this.unReceive = websocket.receive(e => {
         const data = JSON.parse(e.data);
@@ -734,6 +733,7 @@ export default class Schedule extends Component {
     } catch (error) {
       console.log(error);
     }
+
   }
 
   render() {

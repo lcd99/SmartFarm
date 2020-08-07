@@ -6,12 +6,24 @@ class APIWebSocket {
   }
 
   connect() {
-    this.ws = new WebSocket('ws://45.124.87.133/api/ws');
-    //this.ws = new WebSocket('ws://192.168.1.2/api/ws');
-    this.ws.onopen = this.onopen.bind(this);
-    this.ws.onmessage = this.onmessage.bind(this);
-    this.ws.onerror = this.onerror.bind(this);
-    this.ws.onclose = this.onclose.bind(this);
+    try {
+      //this.ws = new WebSocket('ws://45.124.87.133/api/ws');
+      this.ws = new WebSocket('ws://192.168.1.6/api/ws');
+      this.ws.onopen = this.onopen.bind(this);
+      this.ws.onmessage = this.onmessage.bind(this);
+      this.ws.onerror = this.onerror.bind(this);
+      this.ws.onclose = this.onclose.bind(this);
+    } catch (error) {
+      console.log(error);
+      //this.setState({spinner: !this.state.spinner});
+      // Alert.alert('Thông báo', 'Vui lòng kiểm tra lại internet', [
+      //   {
+      //     text: 'OK',
+      //     onPress: () => null,
+      //     style: 'cancel',
+      //   },
+      // ]);
+    }
   }
 
   close() {
