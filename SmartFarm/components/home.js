@@ -6,6 +6,7 @@ import {
   ImageBackground,
   BackHandler,
   Alert,
+  Dimensions,
 } from 'react-native';
 import {
   Container,
@@ -20,9 +21,11 @@ import {
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
+import LinearGradient from 'react-native-linear-gradient';
+
 import {Card} from 'react-native-shadow-cards';
 
-import bc1 from '../images/bancong1.jpg';
+import bc1 from '../images/bancong1.png';
 import farm1 from '../images/farm1.jpg';
 import farm2 from '../images/farm2.jpg';
 import imgCanabit from '../images/canabit.png';
@@ -52,112 +55,145 @@ export default class Home extends Component {
   render() {
     return (
       <Container>
-        <Content style={styles.containerHome}>
-          {/* <Card style={{paddingTop: 20, paddingBottom: 20}}> */}
-          <View style={styles.headerHome}>
-            <View style={styles.Header}>
-              <Text style={styles.titleHome}>Hello!</Text>
-              <Text style={styles.txtName}>{this.state.name}</Text>
-            </View>
-            <View style={styles.Notification}>
-              <Button transparent dark style={styles.btnNotification}>
-                <Icon type="Ionicons" name="ios-notifications" />
-              </Button>
-            </View>
-          </View>
-          {/* </Card> */}
-          <View style={styles.popup}>
-            <Image style={styles.imgPopup} source={bc1} />
-          </View>
-          <View style={styles.TextHeader}>
-            <Text style={styles.txtHeader}>Chức năng</Text>
-            <View style={styles.iconView}>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('AccountManagement')
-                }>
-                <Button transparent dark style={styles.btnFunction}>
-                  <Text style={styles.txtFunction}>Quản lý tài khoản</Text>
-                  <Icon type="Ionicons" name="people-sharp" />
-                </Button>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('Schedule', {
-                    pass: this.state.pass,
-                    username: this.state.username,
-                    nameDevice: this.state.nameDevice,
-                  })
-                }>
-                <Button transparent dark style={styles.btnFunction}>
-                  <Text style={styles.txtFunction}>Cài đặt lịch tưới</Text>
-                  <Icon type="Ionicons" name="ios-settings" />
-                </Button>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('HistorySchedule', {
-                    pass: this.state.pass,
-                    username: this.state.username,
-                    nameDevice: this.state.nameDevice,
-                  })
-                }>
-                <Button transparent dark style={styles.btnFunction}>
-                  <Text style={styles.txtFunction}>Xem lịch sử tưới</Text>
-                  <Icon type="Ionicons" name="md-calendar" />
-                </Button>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('Statistics', {
-                    pass: this.state.pass,
-                    username: this.state.username,
-                    nameDevice: this.state.nameDevice,
-                  })
-                }>
-                <Button transparent dark style={styles.btnFunction}>
-                  <Text style={styles.txtFunction}>Thống kê</Text>
-                  <Icon type="Ionicons" name="bar-chart" />
-                </Button>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.TextHeader}>
-            <Text style={styles.txtHeader}>Nông trại</Text>
-            <View style={styles.cardViewContainer}>
-              <View style={styles.cardView}>
-                <Image style={styles.img} source={bc1} />
-                <View style={styles.textView}>
-                  <Text style={styles.txtFarmName}>Farm 1</Text>
-                </View>
+        <LinearGradient
+          colors={['#ebf4f5', '#ebf4f5']}
+          style={styles.linearGradientContainer}>
+          <Content style={styles.containerHome}>
+            {/* <Card style={{paddingTop: 20, paddingBottom: 20}}> */}
+
+            <View style={styles.headerHome}>
+              <View style={styles.Header}>
+                <Text style={styles.titleHome}>Xin chào!</Text>
+                <Text style={styles.txtName}>{this.state.name}</Text>
               </View>
-              <View style={{flex: 0.1}} />
-              <View style={styles.cardView}>
-                <Image style={styles.img} source={farm2} />
-                <View style={styles.textView}>
-                  <Text style={styles.txtFarmName}>Farm 2</Text>
-                </View>
+              <View style={styles.Notification}>
+                <Button transparent dark style={styles.btnNotification}>
+                  <Icon type="Ionicons" name="ios-notifications" />
+                </Button>
               </View>
             </View>
-          </View>
-        </Content>
+            {/* </Card> */}
+            <View style={styles.popup}>
+              <Image style={styles.imgPopup} source={bc1} />
+            </View>
+            <View style={styles.TextHeader}>
+              <Text style={styles.txtHeader}>Chức năng</Text>
+              <View style={styles.contentOptions}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('DeviceManagement', {
+                      pass: this.state.pass,
+                      username: this.state.username,
+                      nameDevice: this.state.nameDevice,
+                    })
+                  }>
+                  <LinearGradient
+                    colors={['#099773', '#43b692']}
+                    style={styles.linearGradient}>
+                    <View style={styles.options}>
+                      <Icon
+                        type="MaterialIcons"
+                        name="devices-other"
+                        style={styles.iconOptions}
+                      />
+                      <Text style={styles.txtOptions}>Quản lý thiết bị</Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('Schedule', {
+                      pass: this.state.pass,
+                      username: this.state.username,
+                      nameDevice: this.state.nameDevice,
+                    })
+                  }>
+                  <LinearGradient
+                    colors={['#099773', '#43b692']}
+                    style={styles.linearGradient}>
+                    <View style={styles.options}>
+                      <Icon
+                        type="Ionicons"
+                        name="ios-settings"
+                        style={styles.iconOptions}
+                      />
+                      <Text style={styles.txtOptions}>Cài đặt lịch tưới</Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.contentOptions}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('HistorySchedule', {
+                      pass: this.state.pass,
+                      username: this.state.username,
+                      nameDevice: this.state.nameDevice,
+                    })
+                  }>
+                  <LinearGradient
+                    colors={['#099773', '#43b692']}
+                    style={styles.linearGradient}>
+                    <View style={styles.options}>
+                      <Icon
+                        type="Ionicons"
+                        name="md-calendar"
+                        style={styles.iconOptions}
+                      />
+                      <Text style={styles.txtOptions}>
+                        Xem lịch sử lịch tưới
+                      </Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('Statistics', {
+                      pass: this.state.pass,
+                      username: this.state.username,
+                      nameDevice: this.state.nameDevice,
+                    })
+                  }>
+                  <LinearGradient
+                    colors={['#099773', '#43b692']}
+                    style={styles.linearGradient}>
+                    <View style={styles.options}>
+                      <Icon
+                        type="Ionicons"
+                        name="bar-chart"
+                        style={styles.iconOptions}
+                      />
+                      <Text style={styles.txtOptions}>Thống kê</Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
+            </View>
+            {/* <View style={styles.TextHeader}>
+              <Text style={styles.txtHeader}>Hình ảnh</Text>
+              
+            </View> */}
+          </Content>
+        </LinearGradient>
       </Container>
     );
   }
 }
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    color: 'rgba(9, 212, 93, 0.8)',
+    //color: 'rgba(9, 212, 93, 0.8)',
     justifyContent: 'center',
   },
 
   containerHome: {
     flex: 1,
-    padding: 20,
     fontFamily: 'Montserrat',
     color: '#454545',
+    margin: 15,
   },
 
   Header: {
@@ -167,6 +203,37 @@ const styles = StyleSheet.create({
   headerHome: {
     flex: 1,
     flexDirection: 'row',
+  },
+
+  contentOptions: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  linearGradientContainer: {
+    flex: 1,
+  },
+
+  linearGradient: {
+    flex: 1,
+    marginTop: 10,
+    borderRadius: 10,
+  },
+
+  options: {
+    backgroundColor: 'transparent',
+    borderRadius: 10,
+    alignItems: 'center',
+    width: (windowWidth - 40) / 2,
+    height: 115,
+    justifyContent: 'center',
+  },
+
+  txtOptions: {
+    marginTop: 5,
+    textAlign: 'center',
+    color: '#ebf2ea',
   },
 
   titleHome: {
@@ -181,6 +248,7 @@ const styles = StyleSheet.create({
     color: '#454545',
     fontSize: 15,
     marginLeft: 1,
+    fontWeight: 'bold',
   },
 
   Notification: {
@@ -192,12 +260,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
-  imgPopup: {
+  popup: {
     flex: 1,
-    width: '100%',
-    height: 100,
+    backgroundColor: '#3cf2de',
     borderRadius: 10,
     top: 10,
+  },
+
+  imgPopup: {
+    width: '100%',
+    height: 150,
+    borderRadius: 10,
+    backgroundColor: 'transparent',
   },
 
   TextHeader: {
@@ -226,6 +300,7 @@ const styles = StyleSheet.create({
 
   txtFunction: {
     color: '#454545',
+    marginTop: 10,
   },
 
   cardViewContainer: {
@@ -283,5 +358,10 @@ const styles = StyleSheet.create({
 
   txtFooter: {
     color: '#454545',
+  },
+
+  iconOptions: {
+    fontSize: 40,
+    color: '#ebf2ea',
   },
 });

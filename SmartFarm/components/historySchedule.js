@@ -15,6 +15,8 @@ import {Container, Header, Content, DatePicker, Icon, Left} from 'native-base';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import websocket from './websocket.js';
+import LinearGradient from 'react-native-linear-gradient';
+
 
 export default class HistorySchedule extends Component {
   constructor(props) {
@@ -163,23 +165,27 @@ export default class HistorySchedule extends Component {
         <Content>
           <View style={styles.container}>
             <TouchableOpacity onPress={this.showPicker}>
-              <View style={styles.viewDays}>
-                <Left>
-                  <Icon
-                    type="Ionicons"
-                    name="today"
-                    style={{color: '#EBF2EA'}}
+              <LinearGradient
+                colors={['#099773', '#43b692']}
+                style={styles.linearGradient}>
+                <View style={styles.viewDays}>
+                  <Left>
+                    <Icon
+                      type="Ionicons"
+                      name="today"
+                      style={{color: '#EBF2EA'}}
+                    />
+                  </Left>
+                  <Text style={styles.txtDays}>{this.state.chosenDate}</Text>
+                  <DateTimePickerModal
+                    isVisible={this.state.isPickerVisible}
+                    onConfirm={this.handleConfirm}
+                    onCancel={this.hidePicker}
+                    is24Hour={true}
+                    mode={'date'}
                   />
-                </Left>
-                <Text style={styles.txtDays}>{this.state.chosenDate}</Text>
-                <DateTimePickerModal
-                  isVisible={this.state.isPickerVisible}
-                  onConfirm={this.handleConfirm}
-                  onCancel={this.hidePicker}
-                  is24Hour={true}
-                  mode={'date'}
-                />
-              </View>
+                </View>
+              </LinearGradient>
             </TouchableOpacity>
           </View>
           <SafeAreaView style={styles.container}>
@@ -206,14 +212,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  viewDays: {
-    flexDirection: 'row',
-    backgroundColor: '#1fab89',
+  linearGradient: {
+    flex: 1,
     paddingVertical: 10,
     margin: 10,
     marginHorizontal: 10,
     borderRadius: 10,
     paddingHorizontal: 20,
+  },
+
+  viewDays: {
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    
   },
 
   txtDays: {

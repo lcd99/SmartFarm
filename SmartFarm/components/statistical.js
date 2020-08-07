@@ -29,6 +29,7 @@ import {
 import websocket from './websocket.js';
 import moment from 'moment';
 import Spinner from 'react-native-loading-spinner-overlay';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class Statistics extends Component {
   constructor(props) {
@@ -283,9 +284,9 @@ export default class Statistics extends Component {
     const n = d.getMonth() + 1;
 
     const chartConfigFlow = {
-      backgroundGradientFrom: '#ffb22b',
+      backgroundGradientFrom: '#099773',
       backgroundGradientFromOpacity: 1,
-      backgroundGradientTo: '#ffb22b',
+      backgroundGradientTo: '#43b692',
       backgroundGradientToOpacity: 0.5,
       color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
       //color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
@@ -300,9 +301,9 @@ export default class Statistics extends Component {
     };
 
     const chartConfigTime = {
-      backgroundGradientFrom: '#ffb22b',
+      backgroundGradientFrom: '#099773',
       backgroundGradientFromOpacity: 1,
-      backgroundGradientTo: '#ffb22b',
+      backgroundGradientTo: '#43b692',
       backgroundGradientToOpacity: 0.5,
       color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
       strokeWidth: 2, // optional, default 3
@@ -344,50 +345,66 @@ export default class Statistics extends Component {
         <Spinner visible={this.state.spinner} textContent={'Loading...'} />
         <Content>
           <View style={styles.container}>
-            <View style={styles.viewStatistics}>
-              <Form>
-                <Picker
-                  //mode="dropdown"
-                  //iosHeader="Select your SIM"
-                  iosIcon={<Icon name="arrow-down" />}
-                  //style={styles.optionsStatistics}
-                  selectedValue={this.state.selected}
-                  onValueChange={this.onValueChange.bind(this)}>
-                  <Picker.Item label="24 giờ qua" value="24h" />
-                  <Picker.Item label="7 ngày qua" value="7d" />
-                  <Picker.Item label="28 ngày (4 tuần) qua" value="28d" />
-                  <Picker.Item label="90 ngày qua" value="90d" />
-                  <Picker.Item label="365 ngày qua" value="365d" />
-                  <Picker.Item label="Toàn thời gian" value="fulltime" />
-                  <Picker.Item label={'Tháng ' + (n - 1)} value="m1" />
-                  <Picker.Item label={'Tháng ' + (n - 2)} value="m2" />
-                  <Picker.Item label={'Tháng ' + (n - 3)} value="m3" />
-                  <Picker.Item label={'Tháng ' + (n - 4)} value="m4" />
-                  <Picker.Item label={'Tháng ' + (n - 5)} value="m5" />
-                  <Picker.Item label={'Tháng ' + (n - 6)} value="m6" />
-                  <Picker.Item label={'Tháng ' + (n - 7)} value="m7" />
-                </Picker>
-              </Form>
-            </View>
+            <LinearGradient
+              colors={['#099773', '#43b692']}
+              style={styles.linearGradient}>
+              <View style={styles.viewStatistics}>
+                <Form>
+                  <Picker
+                    //mode="dropdown"
+                    //iosHeader="Select your SIM"
+                    iosIcon={<Icon name="arrow-down" />}
+                    //style={styles.optionsStatistics}
+                    selectedValue={this.state.selected}
+                    onValueChange={this.onValueChange.bind(this)}>
+                    <Picker.Item label="24 giờ qua" value="24h" />
+                    <Picker.Item label="7 ngày qua" value="7d" />
+                    <Picker.Item label="28 ngày (4 tuần) qua" value="28d" />
+                    <Picker.Item label="90 ngày qua" value="90d" />
+                    <Picker.Item label="365 ngày qua" value="365d" />
+                    <Picker.Item label="Toàn thời gian" value="fulltime" />
+                    <Picker.Item label={'Tháng ' + (n - 1)} value="m1" />
+                    <Picker.Item label={'Tháng ' + (n - 2)} value="m2" />
+                    <Picker.Item label={'Tháng ' + (n - 3)} value="m3" />
+                    <Picker.Item label={'Tháng ' + (n - 4)} value="m4" />
+                    <Picker.Item label={'Tháng ' + (n - 5)} value="m5" />
+                    <Picker.Item label={'Tháng ' + (n - 6)} value="m6" />
+                    <Picker.Item label={'Tháng ' + (n - 7)} value="m7" />
+                  </Picker>
+                </Form>
+              </View>
+            </LinearGradient>
             <View style={styles.contentOptions}>
-              <View style={styles.options}>
-                <Icon
-                  type="MaterialCommunityIcons"
-                  name="water-pump"
-                  style={{color: '#000'}}
-                />
-                <Text style={styles.txtOptions}>Tổng lưu lượng tưới</Text>
-                <Text style={styles.txtTotal}>{this.state.totalFlow} lít</Text>
-              </View>
-              <View style={styles.options}>
-                <Icon
-                  type="MaterialCommunityIcons"
-                  name="camera-timer"
-                  style={{color: '#000'}}
-                />
-                <Text style={styles.txtOptions}>Tổng thời gian tưới</Text>
-                <Text style={styles.txtTotal}>{this.state.totalTime} giờ</Text>
-              </View>
+              <LinearGradient
+                colors={['#099773', '#43b692']}
+                style={styles.linearGradientOptions}>
+                <View style={styles.options}>
+                  <Icon
+                    type="MaterialCommunityIcons"
+                    name="water-pump"
+                    style={{color: '#000'}}
+                  />
+                  <Text style={styles.txtOptions}>Tổng lưu lượng tưới</Text>
+                  <Text style={styles.txtTotal}>
+                    {this.state.totalFlow} lít
+                  </Text>
+                </View>
+              </LinearGradient>
+              <LinearGradient
+                colors={['#099773', '#43b692']}
+                style={styles.linearGradientOptions}>
+                <View style={styles.options}>
+                  <Icon
+                    type="MaterialCommunityIcons"
+                    name="camera-timer"
+                    style={{color: '#000'}}
+                  />
+                  <Text style={styles.txtOptions}>Tổng thời gian tưới</Text>
+                  <Text style={styles.txtTotal}>
+                    {this.state.totalTime} giờ
+                  </Text>
+                </View>
+              </LinearGradient>
             </View>
             {this.state.dtFlow.length > 0 && (
               <View style={styles.chartFlow}>
@@ -455,17 +472,20 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-between',
   },
 
-  options: {
+  linearGradientOptions: {
     padding: 10,
-    backgroundColor: '#1fab89',
+    backgroundColor: 'transparent',
     //backgroundColor: 'rgba(134, 65, 244,1)',
     borderRadius: 10,
     marginTop: 10,
-    alignItems: 'center',
     marginLeft: 10,
     width: (windowWidth - 30) / 2,
     height: 100,
+  },
+
+  options: {
     justifyContent: 'center',
+    alignItems: 'center',
   },
 
   txtOptions: {
@@ -473,12 +493,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  viewStatistics: {
-    flex: 1,
-    backgroundColor: '#1fab89',
+  linearGradient: {
     marginTop: 10,
     marginHorizontal: 10,
     borderRadius: 10,
+  },
+
+  viewStatistics: {
+    flex: 1,
+    backgroundColor: 'transparent',
   },
 
   chartTime: {

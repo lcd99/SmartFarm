@@ -22,7 +22,7 @@ import SetUpDevice from './components/setUpDevice.js';
 import Schedule from './components/schedule.js';
 import Home from './components/home.js';
 import Profile from './components/profile.js';
-import AccountManagement from './components/AccountManagement.js';
+import DeviceManagement from './components/deviceManagement.js';
 import HistorySchedule from './components/historySchedule.js';
 import Statistics from './components/statistical.js';
 
@@ -62,7 +62,7 @@ class SmartFarm extends Component {
             },
           })}
           tabBarOptions={{
-            activeTintColor: 'green',
+            activeTintColor: '#099773',
             inactiveTintColor: 'gray',
           }}>
           <Tab.Screen
@@ -128,10 +128,10 @@ class SmartFarm extends Component {
             }}
           />
           <Stack.Screen
-            name="AccountManagement"
-            component={AccountManagement}
+            name="DeviceManagement"
+            component={DeviceManagement}
             options={{
-              title: 'Quản lý tài khoản',
+              title: 'Quản lý thiết bị',
             }}
           />
           <Stack.Screen

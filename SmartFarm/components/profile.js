@@ -29,6 +29,7 @@ import {
 
 import websocket from './websocket.js';
 import Toast from 'react-native-simple-toast';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class AccountManagement extends Component {
   constructor(props) {
@@ -228,7 +229,9 @@ export default class AccountManagement extends Component {
     return (
       <Container>
         {this.state.isUpdate == true && (
-          <Header style={{backgroundColor: '#fff'}}>
+          <Header
+            androidStatusBarColor="gray"
+            style={{backgroundColor: '#fff'}}>
             <Left>
               <TouchableOpacity
                 onPress={() => this.setState({isUpdate: false})}>
@@ -348,11 +351,15 @@ export default class AccountManagement extends Component {
                       onPress={() => {
                         this.setModalVisible(true);
                       }}>
-                      <Icon
-                        name="account-edit"
-                        type="MaterialCommunityIcons"
-                        style={styles.iconEditPassword}
-                      />
+                      <LinearGradient
+                        colors={['#30c67c', '#30c67c']}
+                        style={styles.linearGradientIcon}>
+                        <Icon
+                          name="account-edit"
+                          type="MaterialCommunityIcons"
+                          style={styles.iconEditPassword}
+                        />
+                      </LinearGradient>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -366,7 +373,7 @@ export default class AccountManagement extends Component {
                     style={styles.textInput}
                     onChangeText={value => this.setState({nameUpdate: value})}
                     value={this.state.nameUpdate}
-                    underlineColorAndroid='transparent'
+                    underlineColorAndroid="transparent"
                   />
                 </View>
                 <View style={styles.formUpdate}>
@@ -414,12 +421,30 @@ export default class AccountManagement extends Component {
           </View>
         </Content>
         <TouchableOpacity onPress={this._isUpdateClick}>
-          <View style={styles.btnUpdateProfile}>
-            <Text style={styles.txtUpdateProfile}>
-              {this.state.isUpdate == false ? 'Cập nhật thông tin' : 'Cập nhật'}
-            </Text>
-          </View>
+          <LinearGradient
+            colors={['#30c67c', '#30c67c']}
+            style={styles.linearGradient}>
+            <View style={styles.btnUpdateProfile}>
+              <Text style={styles.txtUpdateProfile}>
+                {this.state.isUpdate == false
+                  ? 'Cập nhật thông tin'
+                  : 'Cập nhật'}
+              </Text>
+            </View>
+          </LinearGradient>
         </TouchableOpacity>
+        {this.state.isUpdate == false && (
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Login')}>
+            <LinearGradient
+              colors={['#fd4b2f', '#fd4b2f']}
+              style={styles.linearGradient}>
+              <View style={styles.btnLogout}>
+                <Text style={styles.txtLogout}>Đăng xuất</Text>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+        )}
 
         <Modal
           //scrollHorizontal={true}
@@ -613,22 +638,46 @@ const styles = StyleSheet.create({
     color: '#454545',
   },
 
+  linearGradientIcon:{
+    padding: 5,
+    borderRadius: 5,
+  }
+,
   iconEditPassword: {
     fontSize: 20,
     color: '#fff',
-    backgroundColor: 'green',
-    padding: 5,
-    borderRadius: 5,
+    backgroundColor: 'transparent',
+    
   },
 
   btnUpdateProfile: {
-    backgroundColor: 'green',
+    backgroundColor: 'transparent',
+    // padding: 10,
+    // marginHorizontal: 15,
+    // borderRadius: 5,
+    // alignItems: 'center',
+    // //marginBottom: 10,
+    // marginHorizontal: 10,
+  },
+
+  linearGradient: {
+    marginTop: 10,
     padding: 10,
     marginHorizontal: 15,
     borderRadius: 5,
     alignItems: 'center',
     //marginBottom: 10,
     marginHorizontal: 10,
+  },
+
+  btnLogout: {
+    backgroundColor: 'transparent',
+  },
+
+  txtLogout: {
+    fontSize: 16,
+    fontWeight: '900',
+    color: '#fff',
   },
 
   txtUpdateProfile: {
