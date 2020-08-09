@@ -104,14 +104,14 @@ export default class Statistics extends Component {
     }
 
     //console.log(action);
-    this.setState({spinner: !this.state.spinner});
+    //this.setState({spinner: !this.state.spinner});
 
     websocket.send(JSON.stringify(action));
   }
 
   componentDidMount() {
     try {
-      this.setState({spinner: !this.state.spinner});
+      //this.setState({spinner: !this.state.spinner});
       var action24h = {
         action: '24h',
         data: {
@@ -122,6 +122,8 @@ export default class Statistics extends Component {
 
       this.unReceive = websocket.receive(e => {
         const data = JSON.parse(e.data);
+
+        console.log(data);
 
         if (data.action == '24h') {
           const dtStatistics = JSON.parse(data.message);
@@ -156,7 +158,7 @@ export default class Statistics extends Component {
             dtTime: dtTime,
           });
 
-          this.setState({spinner: !this.state.spinner});
+          //this.setState({spinner: !this.state.spinner});
         } else if (data.action == 'statisticalByDate') {
           const dtStatisticsByDate = JSON.parse(data.message);
 
@@ -197,7 +199,7 @@ export default class Statistics extends Component {
             labelsTime: labelsTime,
             dtTime: dtTime,
           });
-          this.setState({spinner: !this.state.spinner});
+          //this.setState({spinner: !this.state.spinner});
         } else if (data.action == 'statisticalByMonth') {
           const dtStatisticsByDate = JSON.parse(data.message);
 
@@ -237,7 +239,7 @@ export default class Statistics extends Component {
             labelsTime: labelsTime,
             dtTime: dtTime,
           });
-          this.setState({spinner: !this.state.spinner});
+          //this.setState({spinner: !this.state.spinner});
         } else if (data.action == 'statisticalByYear') {
           const dtStatisticsByDate = JSON.parse(data.message);
 
@@ -271,7 +273,7 @@ export default class Statistics extends Component {
             labelsTime: labelsTime,
             dtTime: dtTime,
           });
-          this.setState({spinner: !this.state.spinner});
+          //this.setState({spinner: !this.state.spinner});
         }
       });
     } catch (error) {
