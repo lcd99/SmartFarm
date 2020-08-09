@@ -17,6 +17,7 @@ import {
   FooterTab,
   Text,
   Badge,
+  Left,
 } from 'native-base';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -62,15 +63,20 @@ export default class Home extends Component {
             {/* <Card style={{paddingTop: 20, paddingBottom: 20}}> */}
 
             <View style={styles.headerHome}>
-              <View style={styles.Header}>
-                <Text style={styles.titleHome}>Xin chào!</Text>
-                <Text style={styles.txtName}>{this.state.name}</Text>
-              </View>
-              <View style={styles.Notification}>
-                <Button transparent dark style={styles.btnNotification}>
-                  <Icon type="Ionicons" name="ios-notifications" />
-                </Button>
-              </View>
+              <Left>
+                <LinearGradient
+                  colors={['#099773', '#43b692']}
+                  style={styles.linearGradientName}>
+                  <View style={styles.viewName}>
+                    <Text style={styles.txtName}>{this.state.name}</Text>
+                  </View>
+                </LinearGradient>
+              </Left>
+              <LinearGradient
+                colors={['#099773', '#43b692']}
+                style={styles.linearGradientIcon}>
+                <Icon type="Ionicons" name="ios-notifications" style={{color: '#fff'}} />
+              </LinearGradient>
             </View>
             {/* </Card> */}
             <View style={styles.popup}>
@@ -245,14 +251,10 @@ const styles = StyleSheet.create({
 
   txtName: {
     flex: 1,
-    color: '#454545',
-    fontSize: 15,
-    marginLeft: 1,
+    color: '#fff',
+    fontSize: 20,
     fontWeight: 'bold',
-  },
-
-  Notification: {
-    justifyContent: 'center',
+    paddingVertical: 5,
   },
 
   btnNotification: {
@@ -284,6 +286,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#454545',
     flex: 1,
+  },
+
+  viewName: {
+    backgroundColor: 'transparent',
+  },
+
+  linearGradientName: {
+    padding: 5,
+    width: '100%',
+    borderRadius: 10,
+  },
+
+  linearGradientIcon: {
+    padding: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    marginLeft: 10,
   },
 
   iconView: {
