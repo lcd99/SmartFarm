@@ -120,7 +120,7 @@ export default class Login extends Component {
         // console.log(e);
 
         const data = JSON.parse(e.data);
-        //console.log(data.message);
+        //console.log(data.action);
         if (data.action == 'DeviceSendDataServer') {
           if (data.message == 'addDataDeviceSuccess') {
             console.log('Thêm thành công thiết bị');
@@ -161,7 +161,7 @@ export default class Login extends Component {
       });
     } catch (error) {
       console.log(error);
-      this.setState({spinner: !this.state.spinner});
+      this.setState({spinner: false});
       Alert.alert('Thông báo', 'Vui lòng kiểm tra lại internet', [
         {
           text: 'OK',
