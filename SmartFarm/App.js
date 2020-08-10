@@ -6,172 +6,180 @@
  * @flow strict-local
  */
 
-import React, {Component, useEffect, useState} from 'react';
-import {AppState} from 'react-native';
+import React, { Component, useEffect, useState } from 'react'
+import { AppState } from 'react-native'
 
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack'
 //import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import Ws from './components/websocket.js';
-import WsDevice from './components/websocketDevice.js';
-import Login from './components/login.js';
-import SetUpDevice from './components/setUpDevice.js';
-import Schedule from './components/schedule.js';
-import Home from './components/home.js';
-import Profile from './components/profile.js';
-import DeviceManagement from './components/deviceManagement.js';
-import HistorySchedule from './components/historySchedule.js';
-import Statistics from './components/statistical.js';
-
+import Ws from './components/websocket.js'
+import WsDevice from './components/websocketDevice.js'
+import Login from './components/login.js'
+import SetUpDevice from './components/setUpDevice.js'
+import Schedule from './components/schedule.js'
+import Home from './components/home.js'
+import Profile from './components/profile.js'
+import DeviceManagement from './components/deviceManagement.js'
+import HistorySchedule from './components/historySchedule.js'
+import Statistics from './components/statistical.js'
 
 //const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator()
 
-Ionicons.loadFont();
+Ionicons.loadFont()
 
-console.disableYellowBox = true;
+console.disableYellowBox = true
 
 class SmartFarm extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
   render() {
-    createHomeStack = ({route}) => {
-      const {name} = route.params;
-      const {username} = route.params;
-      const {pass} = route.params;
-      const {nameDevice} = route.params;
+    createHomeStack = ({ route }) => {
+      const { name } = route.params
+      const { username } = route.params
+      const { pass } = route.params
+      const { nameDevice } = route.params
       //console.log(JSON.stringify(dataUser));
       return (
         <Tab.Navigator
-          screenOptions={({route}) => ({
-            tabBarIcon: ({focused, color, size}) => {
-              let iconName;
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName
               if (route.name === 'Home') {
-                iconName = focused ? 'md-home' : 'md-home';
+                iconName = focused ? 'md-home' : 'md-home'
               } else if (route.name === 'Profile') {
-                iconName = focused ? 'ios-person-circle' : 'ios-person-circle';
+                iconName = focused ? 'ios-person-circle' : 'ios-person-circle'
               }
 
               // You can return any component that you like here!
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
+              return <Ionicons name={iconName} size={size} color={color} />
+            }
           })}
           tabBarOptions={{
             activeTintColor: '#099773',
-            inactiveTintColor: 'gray',
-          }}>
+            inactiveTintColor: 'gray'
+          }}
+        >
           <Tab.Screen
-            name="Home"
+            name='Home'
             component={Home}
             options={{
-              headerLeft: null,
+              headerLeft: null
             }}
             initialParams={{
               name: name,
               username: username,
               pass: pass,
-              nameDevice: nameDevice,
+              nameDevice: nameDevice
             }}
           />
           <Tab.Screen
-            name="Profile"
+            name='Profile'
             component={Profile}
             options={{
-              title: 'Thông tin cá nhân',
+              title: 'Thông tin cá nhân'
             }}
             initialParams={{
               name: name,
               username: username,
               pass: pass,
-              nameDevice: nameDevice,
+              nameDevice: nameDevice
             }}
           />
         </Tab.Navigator>
-      );
-    };
+      )
+    }
     return (
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Login"
+            name='Login'
             component={Login}
             options={{
               headerShown: false,
-              headerLeft: null,
+              headerLeft: null
             }}
           />
           <Stack.Screen
-            name="SetUpDevice"
+            name='SetUpDevice'
             component={SetUpDevice}
             options={{
-              title: 'Cài đặt thiết bị',
+              title: 'Cài đặt thiết bị'
             }}
           />
           <Stack.Screen
-            name="Home"
+            name='Home'
             // eslint-disable-next-line no-undef
             component={createHomeStack}
             options={{
-              headerShown: false,
+              headerShown: false
             }}
           />
           <Stack.Screen
-            name="Schedule"
+            name='Schedule'
             component={Schedule}
             options={{
-              title: 'Lịch tưới',
+              title: 'Lịch tưới'
             }}
           />
           <Stack.Screen
-            name="DeviceManagement"
+            name='DeviceManagement'
             component={DeviceManagement}
             options={{
-              title: 'Quản lý thiết bị',
+              title: 'Quản lý thiết bị'
             }}
           />
           <Stack.Screen
-            name="HistorySchedule"
+            name='HistorySchedule'
             component={HistorySchedule}
             options={{
-              title: 'Lịch sử tưới',
+              title: 'Lịch sử tưới'
             }}
           />
           <Stack.Screen
-            name="Statistics"
+            name='Statistics'
             component={Statistics}
             options={{
-              title: 'Thống kê',
+              title: 'Thống kê'
             }}
           />
         </Stack.Navigator>
       </NavigationContainer>
-    );
+    )
   }
 }
 
 export default function App() {
-  const [appState, setAppState] = useState(AppState.currentState);
+  const [appState, setAppState] = useState(AppState.currentState)
 
   useEffect(() => {
-    AppState.addEventListener('change', _handleAppStateChange);
-
+    reConnnectAll()
+    AppState.addEventListener('change', _handleAppStateChange)
     return () => {
-      AppState.removeEventListener('change', _handleAppStateChange);
-    };
-  }, []);
+      AppState.removeEventListener('change', _handleAppStateChange)
+    }
+  }, [])
+  reConnnectAll = () => {
+    Ws.close()
+    Ws.connect()
+    WsDevice.close()
+    WsDevice.connect()
+  }
+  useEffect(() => {
+    if (appState === 'active') {
+      reConnnectAll()
+    }
+  }, [appState])
 
-  const _handleAppStateChange = nextAppState => {
-    Ws.close();
-    Ws.connect();
-    WsDevice.close();
-    WsDevice.connect();
-    setAppState(nextAppState);
-  };
+  const _handleAppStateChange = (nextAppState) => {
+    reConnnectAll()
+    setAppState(nextAppState)
+  }
 
-  return <SmartFarm />;
+  return <SmartFarm />
 }
