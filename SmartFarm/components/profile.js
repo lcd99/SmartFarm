@@ -703,6 +703,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     //backgroundColor: 'rgba(5,165,209,0.1)',
     backgroundColor: 'rgba(0,0,0,0)',
+    paddingVertical: 10,
+    color: '#000',
   },
 
   modalView: {
