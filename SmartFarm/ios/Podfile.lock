@@ -235,6 +235,8 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
   - React-jsinspector (0.62.2)
+  - react-native-alarm-notification (1.5.1):
+    - React
   - react-native-netinfo (5.9.4):
     - React
   - react-native-safe-area-context (3.0.7):
@@ -361,6 +363,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-alarm-notification (from `../node_modules/react-native-alarm-notification`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
@@ -433,6 +436,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-alarm-notification:
+    :path: "../node_modules/react-native-alarm-notification"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
@@ -507,6 +512,7 @@ SPEC CHECKSUMS:
   React-jsi: b6dc94a6a12ff98e8877287a0b7620d365201161
   React-jsiexecutor: 1540d1c01bb493ae3124ed83351b1b6a155db7da
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
+  react-native-alarm-notification: 32379751e4f86f2f381a0fd2b2814dc168b3c6f2
   react-native-netinfo: eed0fb1d6a9424e98ce686f92aad62ff427d4bc9
   react-native-safe-area-context: c39fc20a20cd66ebf1d56c6f8b8711142fbfee98
   react-native-simple-toast: a3a8e9033a549c11741debe875e54698cc4c0dd7
@@ -535,4 +541,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: be6ad84d24ed228818a0fa3ffa901398a90a995d
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

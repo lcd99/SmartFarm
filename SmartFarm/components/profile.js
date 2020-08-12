@@ -638,16 +638,14 @@ const styles = StyleSheet.create({
     color: '#454545',
   },
 
-  linearGradientIcon:{
+  linearGradientIcon: {
     padding: 5,
     borderRadius: 5,
-  }
-,
+  },
   iconEditPassword: {
     fontSize: 20,
     color: '#fff',
     backgroundColor: 'transparent',
-    
   },
 
   btnUpdateProfile: {
@@ -692,6 +690,8 @@ const styles = StyleSheet.create({
 
   titleUpdate: {
     fontWeight: 'bold',
+    marginTop: 10,
+    marginLeft: 10,
   },
 
   textInput: {
@@ -737,7 +737,7 @@ const styles = StyleSheet.create({
   },
 
   formUpdatePass: {
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     marginTop: 10,
   },
 
@@ -772,28 +772,19 @@ const styles = StyleSheet.create({
   inInput: {
     flexDirection: 'row',
     marginTop: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 10,
   },
 
   inputIcon: {
     padding: 10,
-    borderTopWidth: 0.7,
-    borderRightWidth: 0.7,
-    borderBottomWidth: 0.7,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderColor: '#424242',
+    //backgroundColor: '#f00',
   },
 
   input: {
     flex: 1,
-    backgroundColor: '#fff',
     color: '#000',
     paddingLeft: 10,
-    borderTopWidth: 0.7,
-    borderLeftWidth: 0.7,
-    borderBottomWidth: 0.7,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderColor: '#424242',
   },
 });

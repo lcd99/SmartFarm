@@ -39,8 +39,8 @@ export default class Login extends Component {
       showPass: true,
       press: false,
 
-      username: 'admin01',
-      password: '12345',
+      username: '',
+      password: '',
 
       // username: 'admin01',
       // password: '12345',
