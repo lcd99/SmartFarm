@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 class APIWebSocket {
   static idListener = 0;
 
@@ -8,13 +9,13 @@ class APIWebSocket {
   connect() {
     try {
       this.ws = new WebSocket('ws://45.124.87.133/api/ws');
-      //this.ws = new WebSocket('ws://192.168.1.17/api/ws');
+      //this.ws = new WebSocket('ws://192.168.1.23/api/ws');
       this.ws.onopen = this.onopen.bind(this);
       this.ws.onmessage = this.onmessage.bind(this);
       this.ws.onerror = this.onerror.bind(this);
       this.ws.onclose = this.onclose.bind(this);
     } catch (error) {
-      console.log(error);
+      console.log('Error websocket: ' + error);
       //this.setState({spinner: !this.state.spinner});
       // Alert.alert('Thông báo', 'Vui lòng kiểm tra lại internet', [
       //   {
@@ -46,6 +47,9 @@ class APIWebSocket {
   };
 
   send(data) {
+    // if (!this.ws) {
+    //   return;
+    // }
     this.ws.send(data);
   }
   receive(listen) {
@@ -57,14 +61,20 @@ class APIWebSocket {
   }
 
   onerror(e) {
-    console.log(e);
+    console.log('onerror: ' + e.message);
+    Alert.alert('Thông báo', 'Không thể kết nối đến server', [
+      {
+        text: 'Đồng ý',
+        onPress: () => null,
+        style: 'cancel',
+      },
+    ]);
   }
 
   onclose(e) {
-    console.log(e);
-    setTimeout(() => {
-      this.connect();
-    }, 1000);
+    console.log('onclose: ' + e.message);
+    this.connect();
+    //setTimeout(this.connect(), 1000);
   }
 }
 

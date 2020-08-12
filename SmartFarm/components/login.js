@@ -28,6 +28,9 @@ import bg from '../images/bg.jpg';
 import websocket from './websocket.js';
 import Loading from './Loading.js';
 
+import Alarm from './alarm';
+import Alarms from './alarm';
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -36,8 +39,8 @@ export default class Login extends Component {
       showPass: true,
       press: false,
 
-      username: '',
-      password: '',
+      username: 'admin01',
+      password: '12345',
 
       // username: 'admin01',
       // password: '12345',
@@ -66,28 +69,47 @@ export default class Login extends Component {
   };
 
   login = () => {
-    NetInfo.fetch().then(state => {
-      // console.log('Connection type', state.type);
-      // console.log('Is connected?', state.isConnected);
+    try {
+      NetInfo.fetch().then(state => {
+        // console.log('Connection type', state.type);
+        // console.log('Is connected?', state.isConnected);
 
-      if (!state.isConnected) {
-        Toast.show(
-          'Vui lòng kiểm tra lại internet để tiếp tục sử dụng.',
-          Toast.LONG,
-        );
-      } else {
-        this.setState({spinner: !this.state.spinner});
+        if (!state.isConnected) {
+          Toast.show(
+            'Vui lòng kiểm tra lại internet để tiếp tục sử dụng.',
+            Toast.LONG,
+          );
+        } else {
+          if (this.state.password == '' || this.state.username == '') {
+            Alert.alert(
+              'Thông báo',
+              'Vui lòng nhập đầy đủ tài khoản và mật khẩu',
+              [
+                {
+                  text: 'Đồng ý',
+                  onPress: () => null,
+                  style: 'cancel',
+                },
+              ],
+            );
+          } else {
+            this.setState({spinner: !this.state.spinner});
 
-        var actionLogin = {
-          action: 'login', //EnumConst.LOGIN
-          data: {
-            username: this.state.username,
-            password: this.state.password,
-          },
-        };
-        websocket.send(JSON.stringify(actionLogin));
-      }
-    });
+            var actionLogin = {
+              action: 'login',
+              data: {
+                username: this.state.username,
+                password: this.state.password,
+              },
+            };
+            websocket.send(JSON.stringify(actionLogin));
+          }
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({spinner: false});
+    }
   };
 
   AlertFailSetupDevice = () => {
@@ -177,8 +199,9 @@ export default class Login extends Component {
     return (
       <Container>
         {/* <Loading></Loading> */}
-
         <Spinner visible={this.state.spinner} textContent={'Loading...'} />
+        {/* <Alarms /> */}
+
         <ImageBackground source={bg} style={styles.backgroundContainer}>
           <Content
             contentContainerStyle={{
