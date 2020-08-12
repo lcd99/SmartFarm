@@ -7,7 +7,12 @@
  */
 
 import React, {Component, useEffect, useState} from 'react';
-import {AppState} from 'react-native';
+import {
+  AppState,
+  ToastAndroid,
+  Platform,
+  DeviceEventEmitter,
+} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 //import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -25,7 +30,7 @@ import Profile from './components/profile.js';
 import DeviceManagement from './components/deviceManagement.js';
 import HistorySchedule from './components/historySchedule.js';
 import Statistics from './components/statistical.js';
-
+import moment from 'moment';
 
 //const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -35,9 +40,196 @@ Ionicons.loadFont();
 
 console.disableYellowBox = true;
 
+import ReactNativeAN from 'react-native-alarm-notification';
+
+const alarmNotifData = {
+  title: 'Chuẩn bị tưới',
+  message: '',
+  vibrate: true,
+  play_sound: true,
+  schedule_type: 'once',
+  channel: 'wakeup',
+  data: {content: 'my notification id is 22'},
+  loop_sound: true,
+  has_button: true,
+};
+
+const repeatAlarmNotifData = {
+  title: 'Thông báo',
+  message: 'Stand up',
+  vibrate: true,
+  play_sound: true,
+  schedule_type: 'repeat',
+  channel: 'wakeup',
+  data: {content: 'my notification id is 22'},
+  loop_sound: true,
+  repeat_interval: 1, // repeat after 1 minute
+};
+
 class SmartFarm extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      fireDate: '',
+      update: [],
+      futureFireDate: '1000',
+      alarmId: null,
+
+      timesAlarm: [],
+    };
+  }
+
+  setAlarm = async (input, message) => {
+    const {fireDate, update, timesAlarm} = this.state;
+
+    // var checkTimes = moment().format('DD-MM-yyyy').toString() + ' ' + moment(new Date()).format('HH:mm') + ':00';
+
+    // for(var i = 0; i < timesAlarm.length; i++) {
+    //   if(checkTimes == timesAlarm[i]){
+
+    //   }
+    // }
+
+    const details = {
+      ...alarmNotifData,
+      fire_date: input,
+      message: message + input,
+    };
+    console.log(`alarm set: ${input}`);
+
+    try {
+      const alarm = await ReactNativeAN.scheduleAlarm(details);
+      console.log(alarm);
+      if (alarm) {
+        this.setState({
+          update: [...update, {date: `alarm set: ${input}`, id: alarm.id}],
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  setRpeatAlarm = async () => {
+    const {fireDate, update} = this.state;
+
+    const details = {...repeatAlarmNotifData, fire_date: fireDate};
+    console.log(`alarm set: ${fireDate}`);
+
+    try {
+      const alarm = await ReactNativeAN.scheduleAlarm(details);
+      console.log(alarm);
+      if (alarm) {
+        this.setState({
+          update: [...update, {date: `alarm set: ${fireDate}`, id: alarm.id}],
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  setFutureAlarm = async () => {
+    const {futureFireDate, update} = this.state;
+
+    const fire_date = ReactNativeAN.parseDate(
+      new Date(Date.now() + parseInt(futureFireDate, 10)),
+    );
+    const details = {...alarmNotifData, fire_date};
+    console.log(`alarm set: ${fire_date}`);
+
+    try {
+      const alarm = await ReactNativeAN.scheduleAlarm(details);
+      console.log(alarm);
+      if (alarm) {
+        this.setState({
+          update: [...update, {date: `alarm set: ${fire_date}`, id: alarm.id}],
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  stopAlarmSound = () => {
+    ReactNativeAN.stopAlarmSound();
+  };
+
+  sendNotification = () => {
+    const details = {
+      ...alarmNotifData,
+      data: {content: 'my notification id is 45'},
+    };
+    console.log(details);
+    ReactNativeAN.sendNotification(details);
+  };
+
+  componentWillUnmount() {
+    if (this.unReceive) {
+      this.unReceive();
+    }
+
+    DeviceEventEmitter.removeListener('OnNotificationDismissed');
+    DeviceEventEmitter.removeListener('OnNotificationOpened');
+  }
+  componentDidMount() {
+    try {
+      DeviceEventEmitter.addListener('OnNotificationDismissed', async function(
+        e,
+      ) {
+        const obj = JSON.parse(e);
+        console.log(`Notification id: ${obj.id} dismissed`);
+      });
+
+      DeviceEventEmitter.addListener('OnNotificationOpened', async function(e) {
+        const obj = JSON.parse(e);
+        console.log(obj);
+      });
+
+      if (Platform.OS === 'ios') {
+        this.showPermissions();
+
+        ReactNativeAN.requestPermissions({
+          alert: true,
+          badge: true,
+          sound: true,
+        }).then(
+          data => {
+            console.log('RnAlarmNotification.requestPermissions', data);
+          },
+          data => {
+            console.log('RnAlarmNotification.requestPermissions failed', data);
+          },
+        );
+      }
+
+      this.unReceive = Ws.receive(e => {
+        // console.log(e);
+
+        const data = JSON.parse(e.data);
+
+        if (data.action == 'DeviceSendDataCompleted') {
+          if (data.message == 'addLogBalconyDevice Success') {
+            // if (this.state.nameDevice == data.data.nameDevice) {
+            let input =
+              moment()
+                .format('DD-MM-yyyy')
+                .toString() +
+              ' ' +
+              data.data.time +
+              ':00';
+            this.setAlarm(
+              input,
+              'Đã tưới xong ',
+            );
+          }
+          // }
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
   render() {
     createHomeStack = ({route}) => {
@@ -70,6 +262,7 @@ class SmartFarm extends Component {
             component={Home}
             options={{
               headerLeft: null,
+              title: 'Trang chủ',
             }}
             initialParams={{
               name: name,

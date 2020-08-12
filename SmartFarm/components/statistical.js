@@ -123,7 +123,7 @@ export default class Statistics extends Component {
       this.unReceive = websocket.receive(e => {
         const data = JSON.parse(e.data);
 
-        console.log(data);
+        //console.log(data);
 
         if (data.action == '24h') {
           const dtStatistics = JSON.parse(data.message);

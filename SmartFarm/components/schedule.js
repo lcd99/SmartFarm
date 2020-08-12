@@ -15,6 +15,8 @@ import {
   ContentThatGoesAboveTheFlatList,
   ContentThatGoesBelowTheFlatList,
   TouchableWithoutFeedback,
+  ToastAndroid,
+  DeviceEventEmitter,
 } from 'react-native';
 
 import {
@@ -50,6 +52,32 @@ import moment from 'moment';
 import websocket from './websocket.js';
 
 //import TimePicker from 'react-native-simple-time-picker';
+
+import ReactNativeAN from 'react-native-alarm-notification';
+
+const alarmNotifData = {
+  title: 'Chuẩn bị tưới',
+  message: '',
+  vibrate: true,
+  play_sound: true,
+  schedule_type: 'once',
+  channel: 'wakeup',
+  data: {content: 'my notification id is 22'},
+  loop_sound: true,
+  has_button: true,
+};
+
+const repeatAlarmNotifData = {
+  title: 'Thông báo',
+  message: 'Stand up',
+  vibrate: true,
+  play_sound: true,
+  schedule_type: 'repeat',
+  channel: 'wakeup',
+  data: {content: 'my notification id is 22'},
+  loop_sound: true,
+  repeat_interval: 1, // repeat after 1 minute
+};
 
 export default class Schedule extends Component {
   constructor(props) {
@@ -87,7 +115,7 @@ export default class Schedule extends Component {
     isPickerVisible: false,
 
     //chosenTime: new Date().getHours() + ':' + new Date().getMinutes(),
-    chosenTime: moment(new Date).format('HH:mm'),
+    chosenTime: moment(new Date()).format('HH:mm'),
 
     text: '',
     irrigationTime: '0',
@@ -135,6 +163,100 @@ export default class Schedule extends Component {
     idSchedule: '',
     statusUpdate: '',
     repeatUpdate: '',
+
+    //Thông báo
+    //fireDate: ReactNativeAN.parseDate(new Date(Date.now())),
+    fireDate: '',
+    update: [],
+    futureFireDate: '1000',
+    alarmId: null,
+
+    timesAlarm: [],
+  };
+
+  setAlarm = async (input, message) => {
+    const {fireDate, update, timesAlarm} = this.state;
+
+    // var checkTimes = moment().format('DD-MM-yyyy').toString() + ' ' + moment(new Date()).format('HH:mm') + ':00';
+
+    // for(var i = 0; i < timesAlarm.length; i++) {
+    //   if(checkTimes == timesAlarm[i]){
+
+    //   }
+    // }
+
+    const details = {
+      ...alarmNotifData,
+      fire_date: input,
+      message: message + input,
+    };
+    console.log(`alarm set: ${input}`);
+
+    try {
+      const alarm = await ReactNativeAN.scheduleAlarm(details);
+      console.log(alarm);
+      if (alarm) {
+        this.setState({
+          update: [...update, {date: `alarm set: ${input}`, id: alarm.id}],
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  setRpeatAlarm = async () => {
+    const {fireDate, update} = this.state;
+
+    const details = {...repeatAlarmNotifData, fire_date: fireDate};
+    console.log(`alarm set: ${fireDate}`);
+
+    try {
+      const alarm = await ReactNativeAN.scheduleAlarm(details);
+      console.log(alarm);
+      if (alarm) {
+        this.setState({
+          update: [...update, {date: `alarm set: ${fireDate}`, id: alarm.id}],
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  setFutureAlarm = async () => {
+    const {futureFireDate, update} = this.state;
+
+    const fire_date = ReactNativeAN.parseDate(
+      new Date(Date.now() + parseInt(futureFireDate, 10)),
+    );
+    const details = {...alarmNotifData, fire_date};
+    console.log(`alarm set: ${fire_date}`);
+
+    try {
+      const alarm = await ReactNativeAN.scheduleAlarm(details);
+      console.log(alarm);
+      if (alarm) {
+        this.setState({
+          update: [...update, {date: `alarm set: ${fire_date}`, id: alarm.id}],
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  stopAlarmSound = () => {
+    ReactNativeAN.stopAlarmSound();
+  };
+
+  sendNotification = () => {
+    const details = {
+      ...alarmNotifData,
+      data: {content: 'my notification id is 45'},
+    };
+    console.log(details);
+    ReactNativeAN.sendNotification(details);
   };
 
   checkActiveIconFooter = () => {
@@ -322,7 +444,6 @@ export default class Schedule extends Component {
 
     this.setState({spinner: !this.state.spinner});
 
-
     try {
       if (this.state.timeIrr == true) {
         var addScheduleModeTime = {
@@ -381,7 +502,13 @@ export default class Schedule extends Component {
 
   showDialog = () => {
     if (this.state.selectedLists.length == 0) {
-      alert('Vui lòng chọn lịch cần xóa');
+      Alert.alert('Thông báo', 'Vui lòng chọn lịch cần xóa', [
+        {
+          text: 'Đồng ý',
+          onPress: () => null,
+          style: 'cancel',
+        },
+      ]);
     } else {
       this.setState({dialogVisible: true});
     }
@@ -410,7 +537,13 @@ export default class Schedule extends Component {
       websocket.send(JSON.stringify(deleteSchedule));
       this.setState({spinner: !this.state.spinner});
     } else {
-      alert('Mật khẩu không đúng!');
+      Alert.alert('Thông báo', 'Mật khẩu không đúng, vui lòng nhập lại', [
+        {
+          text: 'Đồng ý',
+          onPress: () => null,
+          style: 'destructive',
+        },
+      ]);
     }
     //this.setState({dialogVisible: false});
   };
@@ -609,9 +742,46 @@ export default class Schedule extends Component {
     }
     let initialCheck = this.state.selectedLists.map(() => false);
     this.setState({isChecked: initialCheck});
+
+    DeviceEventEmitter.removeListener('OnNotificationDismissed');
+    DeviceEventEmitter.removeListener('OnNotificationOpened');
+  }
+
+  componentDidUpdate() {
+    // this.setAlarm();
   }
   componentDidMount() {
     try {
+      DeviceEventEmitter.addListener('OnNotificationDismissed', async function(
+        e,
+      ) {
+        const obj = JSON.parse(e);
+        console.log(`Notification id: ${obj.id} dismissed`);
+      });
+
+      DeviceEventEmitter.addListener('OnNotificationOpened', async function(e) {
+        const obj = JSON.parse(e);
+        console.log(obj);
+      });
+
+      if (Platform.OS === 'ios') {
+        this.showPermissions();
+
+        ReactNativeAN.requestPermissions({
+          alert: true,
+          badge: true,
+          sound: true,
+        }).then(
+          data => {
+            console.log('RnAlarmNotification.requestPermissions', data);
+          },
+          data => {
+            console.log('RnAlarmNotification.requestPermissions failed', data);
+          },
+        );
+      }
+
+      //action nhận data lịch từ server
       var getScheduleIrr = {
         action: 'ClientGetScheduleIrr',
         data: {
@@ -623,7 +793,7 @@ export default class Schedule extends Component {
       this.unReceive = websocket.receive(e => {
         const data = JSON.parse(e.data);
 
-        console.log(data.action);
+        //console.log(data.action);
         //this.setState({spinner: !this.state.spinner});
 
         if (data.action == 'getDataSchedule') {
@@ -634,12 +804,26 @@ export default class Schedule extends Component {
               cvStatus[i].status = false;
             } else {
               cvStatus[i].status = true;
+
+              // let input =
+              //   moment()
+              //     .format('DD-MM-yyyy')
+              //     .toString() +
+              //   ' ' +
+              //   cvStatus[i].time +
+              //   ':00';
+              // this.setAlarm(
+              //   input,
+              //   'Thiết bị ' + this.state.nameDevice + ' bắt đầu tưới',
+              // );
             }
           }
 
           const dataSchedule = cvStatus;
 
           this.setState({dataSchedule: dataSchedule});
+
+          //console.log(dataSchedule);
 
           //this.setState({spinner: !this.state.spinner});
         }
@@ -729,12 +913,63 @@ export default class Schedule extends Component {
             this.setState({spinner: !this.state.spinner});
           }
         }
+
+        // if (data.action == 'DeviceSendDataCompleted') {
+        //   if (data.message == 'addLogBalconyDevice Success') {
+        //     if (this.state.nameDevice == data.data.nameDevice) {
+        //       let input =
+        //         moment()
+        //           .format('DD-MM-yyyy')
+        //           .toString() +
+        //         ' ' +
+        //         data.data.time +
+        //         ':00';
+        //       this.setAlarm(
+        //         input,
+        //         'Thiết bị ' + data.data.nameDevice + ' đã tưới xong ',
+        //       );
+        //     }
+        //   }
+        // }
       });
     } catch (error) {
       console.log(error);
     }
-
   }
+
+  showPermissions = () => {
+    ReactNativeAN.checkPermissions(permissions => {
+      console.log(permissions);
+    });
+  };
+
+  viewAlarms = async () => {
+    const list = await ReactNativeAN.getScheduledAlarms();
+
+    const update = list.map(l => ({
+      date: `alarm: ${l.day}-${l.month}-${l.year} ${l.hour}:${l.minute}:${
+        l.second
+      }`,
+      id: l.id,
+    }));
+
+    this.setState({update});
+  };
+
+  deleteAlarm = async () => {
+    const {alarmId} = this.state;
+    if (alarmId !== '') {
+      console.log(`delete alarm: ${alarmId}`);
+
+      const id = parseInt(alarmId, 10);
+      ReactNativeAN.deleteAlarm(id);
+      this.setState({alarmId: ''});
+
+      ToastAndroid.show('Alarm deleted!', ToastAndroid.SHORT);
+
+      await this.viewAlarms();
+    }
+  };
 
   render() {
     const {
@@ -772,8 +1007,8 @@ export default class Schedule extends Component {
               value={this.state.passInput}
               secureTextEntry={this.state.showPass}
             />
-            <Dialog.Button label="Cancel" onPress={this.handleCancel} />
-            <Dialog.Button label="Delete" onPress={this.handleDelete} />
+            <Dialog.Button label="Hủy" onPress={this.handleCancel} />
+            <Dialog.Button label="Xóa" onPress={this.handleDelete} />
           </Dialog.Container>
         </View>
         <Content style={styles.Content}>
