@@ -120,6 +120,10 @@ export default class Login extends Component {
         // console.log(e);
 
         const data = JSON.parse(e.data);
+        if (data.action == undefined) {
+          this.setState({spinner: false});
+        }
+        console.log(data);
         //console.log(data.message);
         if (data.action == 'DeviceSendDataServer') {
           if (data.message == 'addDataDeviceSuccess') {
