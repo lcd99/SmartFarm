@@ -25,8 +25,12 @@ static void InitializeFlipper(UIApplication *application) {
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+
 {
+  // Force DatePicker locale to current language (for: 24h or 12h format, full day names etc...)
+  NSString *currentLanguage = [[NSLocale preferredLanguages] firstObject];
+  [[UIDatePicker appearance] setLocale:[[NSLocale alloc]initWithLocaleIdentifier:currentLanguage]];
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif

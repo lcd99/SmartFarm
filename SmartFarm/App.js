@@ -164,7 +164,11 @@ class SmartFarm extends Component {
     console.log(details);
     ReactNativeAN.sendNotification(details);
   };
-
+  showPermissions = () => {
+    ReactNativeAN.checkPermissions(permissions => {
+      console.log(permissions);
+    });
+  };
   componentWillUnmount() {
     if (this.unReceive) {
       this.unReceive();
@@ -219,10 +223,7 @@ class SmartFarm extends Component {
               ' ' +
               data.data.time +
               ':00';
-            this.setAlarm(
-              input,
-              'Đã tưới xong ',
-            );
+            this.setAlarm(input, 'Đã tưới xong ');
           }
           // }
         }

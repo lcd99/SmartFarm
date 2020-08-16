@@ -174,91 +174,6 @@ export default class Schedule extends Component {
     timesAlarm: [],
   };
 
-  setAlarm = async (input, message) => {
-    const {fireDate, update, timesAlarm} = this.state;
-
-    // var checkTimes = moment().format('DD-MM-yyyy').toString() + ' ' + moment(new Date()).format('HH:mm') + ':00';
-
-    // for(var i = 0; i < timesAlarm.length; i++) {
-    //   if(checkTimes == timesAlarm[i]){
-
-    //   }
-    // }
-
-    const details = {
-      ...alarmNotifData,
-      fire_date: input,
-      message: message + input,
-    };
-    console.log(`alarm set: ${input}`);
-
-    try {
-      const alarm = await ReactNativeAN.scheduleAlarm(details);
-      console.log(alarm);
-      if (alarm) {
-        this.setState({
-          update: [...update, {date: `alarm set: ${input}`, id: alarm.id}],
-        });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  setRpeatAlarm = async () => {
-    const {fireDate, update} = this.state;
-
-    const details = {...repeatAlarmNotifData, fire_date: fireDate};
-    console.log(`alarm set: ${fireDate}`);
-
-    try {
-      const alarm = await ReactNativeAN.scheduleAlarm(details);
-      console.log(alarm);
-      if (alarm) {
-        this.setState({
-          update: [...update, {date: `alarm set: ${fireDate}`, id: alarm.id}],
-        });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  setFutureAlarm = async () => {
-    const {futureFireDate, update} = this.state;
-
-    const fire_date = ReactNativeAN.parseDate(
-      new Date(Date.now() + parseInt(futureFireDate, 10)),
-    );
-    const details = {...alarmNotifData, fire_date};
-    console.log(`alarm set: ${fire_date}`);
-
-    try {
-      const alarm = await ReactNativeAN.scheduleAlarm(details);
-      console.log(alarm);
-      if (alarm) {
-        this.setState({
-          update: [...update, {date: `alarm set: ${fire_date}`, id: alarm.id}],
-        });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  stopAlarmSound = () => {
-    ReactNativeAN.stopAlarmSound();
-  };
-
-  sendNotification = () => {
-    const details = {
-      ...alarmNotifData,
-      data: {content: 'my notification id is 45'},
-    };
-    console.log(details);
-    ReactNativeAN.sendNotification(details);
-  };
-
   checkActiveIconFooter = () => {
     if (this.state.iconAddSchedule == '') {
       this.setState({iconAddSchedule: 'active'});
@@ -493,7 +408,7 @@ export default class Schedule extends Component {
         nameDevice: this.state.nameDevice,
       },
     };
-    console.log(JSON.stringify(updateStatus));
+    //console.log(JSON.stringify(updateStatus));
 
     websocket.send(JSON.stringify(updateStatus));
     if (val == false) tempData[ind].status = true;
@@ -742,9 +657,6 @@ export default class Schedule extends Component {
     }
     let initialCheck = this.state.selectedLists.map(() => false);
     this.setState({isChecked: initialCheck});
-
-    DeviceEventEmitter.removeListener('OnNotificationDismissed');
-    DeviceEventEmitter.removeListener('OnNotificationOpened');
   }
 
   componentDidUpdate() {
@@ -752,35 +664,6 @@ export default class Schedule extends Component {
   }
   componentDidMount() {
     try {
-      DeviceEventEmitter.addListener('OnNotificationDismissed', async function(
-        e,
-      ) {
-        const obj = JSON.parse(e);
-        console.log(`Notification id: ${obj.id} dismissed`);
-      });
-
-      DeviceEventEmitter.addListener('OnNotificationOpened', async function(e) {
-        const obj = JSON.parse(e);
-        console.log(obj);
-      });
-
-      if (Platform.OS === 'ios') {
-        this.showPermissions();
-
-        ReactNativeAN.requestPermissions({
-          alert: true,
-          badge: true,
-          sound: true,
-        }).then(
-          data => {
-            console.log('RnAlarmNotification.requestPermissions', data);
-          },
-          data => {
-            console.log('RnAlarmNotification.requestPermissions failed', data);
-          },
-        );
-      }
-
       //action nhận data lịch từ server
       var getScheduleIrr = {
         action: 'ClientGetScheduleIrr',
@@ -936,40 +819,6 @@ export default class Schedule extends Component {
       console.log(error);
     }
   }
-
-  showPermissions = () => {
-    ReactNativeAN.checkPermissions(permissions => {
-      console.log(permissions);
-    });
-  };
-
-  viewAlarms = async () => {
-    const list = await ReactNativeAN.getScheduledAlarms();
-
-    const update = list.map(l => ({
-      date: `alarm: ${l.day}-${l.month}-${l.year} ${l.hour}:${l.minute}:${
-        l.second
-      }`,
-      id: l.id,
-    }));
-
-    this.setState({update});
-  };
-
-  deleteAlarm = async () => {
-    const {alarmId} = this.state;
-    if (alarmId !== '') {
-      console.log(`delete alarm: ${alarmId}`);
-
-      const id = parseInt(alarmId, 10);
-      ReactNativeAN.deleteAlarm(id);
-      this.setState({alarmId: ''});
-
-      ToastAndroid.show('Alarm deleted!', ToastAndroid.SHORT);
-
-      await this.viewAlarms();
-    }
-  };
 
   render() {
     const {

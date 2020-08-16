@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TEFICOD.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>AC00EC7B0C07CFFCAA9CE890F6A1815E5DA5B894</string>
+				<key>dateExpires</key>
+				<string>7/22/21</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>2G5WDR8F29.tengroup.SmartFarm</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>2G5WDR8F29</string>
+				<key>get-task-allow</key>
+				<true/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>2G5WDR8F29.tengroup.SmartFarm</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>TEFICOD.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>7a327170-fc69-4c01-9b41-25840435faa3</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: tengroup.SmartFarm</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>2G5WDR8F29</string>
+				<key>name</key>
+				<string>TEN GROUP JOINT STOCK COMPANY</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

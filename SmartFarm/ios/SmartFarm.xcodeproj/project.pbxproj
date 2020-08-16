@@ -16,7 +16,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* SmartFarmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SmartFarmTests.m */; };
 		2F41BBDB604AD6F9D243E002 /* libPods-SmartFarm-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CC3F7955712C753D67F06C /* libPods-SmartFarm-tvOS.a */; };
 		BC74635114BED9FD674BD4E8 /* libPods-SmartFarm-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1051470A053E8EBA483D546A /* libPods-SmartFarm-tvOSTests.a */; };
-		D7DC6DE224C8835A004AC875 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		D793349E24E8FF9E00EF2444 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		D793349F24E903E500EF2444 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		EE1C273C4AF632683B946FB9 /* libPods-SmartFarm-SmartFarmTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 261234E1F4D7BB94380ACF75 /* libPods-SmartFarm-SmartFarmTests.a */; };
 /* End PBXBuildFile section */
 
@@ -380,6 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D793349F24E903E500EF2444 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7DC6DE224C8835A004AC875 /* Images.xcassets in Resources */,
+				D793349E24E8FF9E00EF2444 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
