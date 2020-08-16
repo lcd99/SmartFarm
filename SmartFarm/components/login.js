@@ -145,7 +145,7 @@ export default class Login extends Component {
         if (data.action == undefined) {
           this.setState({spinner: false});
         }
-        console.log(data);
+        //console.log(data);
         if (data.action == 'DeviceSendDataServer') {
           if (data.message == 'addDataDeviceSuccess') {
             console.log('Thêm thành công thiết bị');

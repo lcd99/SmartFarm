@@ -62,13 +62,13 @@ class APIWebSocket {
 
   onerror(e) {
     console.log('onerror: ' + e.message);
-    Alert.alert('Thông báo', 'Không thể kết nối đến server', [
-      {
-        text: 'Đồng ý',
-        onPress: () => null,
-        style: 'cancel',
-      },
-    ]);
+    // Alert.alert('Thông báo', 'Không thể kết nối đến server', [
+    //   {
+    //     text: 'Đồng ý',
+    //     onPress: () => null,
+    //     style: 'cancel',
+    //   },
+    // ]);
   }
 
   onclose(e) {
