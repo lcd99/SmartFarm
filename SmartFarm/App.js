@@ -43,7 +43,7 @@ console.disableYellowBox = true;
 import ReactNativeAN from 'react-native-alarm-notification';
 
 const alarmNotifData = {
-  title: 'Chuẩn bị tưới',
+  title: 'Tưới xong',
   message: '',
   vibrate: true,
   play_sound: true,

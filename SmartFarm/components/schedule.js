@@ -85,13 +85,13 @@ export default class Schedule extends Component {
   }
 
   state = {
-    select1: false,
-    select2: false,
-    select3: false,
-    select4: false,
-    select5: false,
-    select6: false,
-    select7: false,
+    select1: true,
+    select2: true,
+    select3: true,
+    select4: true,
+    select5: true,
+    select6: true,
+    select7: true,
 
     modalVisible: false,
     switchValue: false,
@@ -356,36 +356,57 @@ export default class Schedule extends Component {
 
   addBalconyIrrigationSchedule = () => {
     //console.log(this.state.timeIrr);
-
     this.setState({spinner: !this.state.spinner});
 
     try {
       if (this.state.timeIrr == true) {
-        var addScheduleModeTime = {
-          action: 'addScheduleModeTime',
-          data: {
-            time: this.state.chosenTime,
-            irrigationTime: this.state.irrigationTime,
-            day: this.state.day.join(''),
-            repeat: this.state.repeat,
-            username: this.state.username,
-            nameDevice: this.state.nameDevice,
-          },
-        };
-        websocket.send(JSON.stringify(addScheduleModeTime));
+        if (this.state.irrigationTime == '' || this.state.day == '') {
+          Alert.alert('Thông báo', 'Vui lòng nhập đầy đủ thông tin giờ tưới', [
+            {
+              text: 'Đồng ý',
+              onPress: () => null,
+              style: 'cancel',
+            },
+          ]);
+          this.setState({spinner: false});
+        } else {
+          var addScheduleModeTime = {
+            action: 'addScheduleModeTime',
+            data: {
+              time: this.state.chosenTime,
+              irrigationTime: this.state.irrigationTime,
+              day: this.state.day.join(''),
+              repeat: this.state.repeat,
+              username: this.state.username,
+              nameDevice: this.state.nameDevice,
+            },
+          };
+          websocket.send(JSON.stringify(addScheduleModeTime));
+        }
       } else {
-        var addScheduleModeFlow = {
-          action: 'addScheduleModeFlow',
-          data: {
-            time: this.state.chosenTime,
-            irrigationFlow: this.state.irrigationFlow,
-            day: this.state.day.join(''),
-            repeat: this.state.repeat,
-            username: this.state.username,
-            nameDevice: this.state.nameDevice,
-          },
-        };
-        websocket.send(JSON.stringify(addScheduleModeFlow));
+        if (this.state.irrigationTime == '' || this.state.day == '') {
+          Alert.alert('Thông báo', 'Vui lòng nhập đầy đủ thông tin giờ tưới', [
+            {
+              text: 'Đồng ý',
+              onPress: () => null,
+              style: 'cancel',
+            },
+          ]);
+          this.setState({spinner: false});
+        } else {
+          var addScheduleModeFlow = {
+            action: 'addScheduleModeFlow',
+            data: {
+              time: this.state.chosenTime,
+              irrigationFlow: this.state.irrigationFlow,
+              day: this.state.day.join(''),
+              repeat: this.state.repeat,
+              username: this.state.username,
+              nameDevice: this.state.nameDevice,
+            },
+          };
+          websocket.send(JSON.stringify(addScheduleModeFlow));
+        }
       }
     } catch (error) {
       console.log(error);
@@ -963,6 +984,7 @@ export default class Schedule extends Component {
                               onCancel={this.hidePicker}
                               is24Hour={true}
                               mode={'time'}
+                              date={new Date()}
                             />
                           </View>
                         </TouchableOpacity>
