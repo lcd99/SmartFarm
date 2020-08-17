@@ -782,7 +782,13 @@ export default class Schedule extends Component {
             this.setModalVisible(false);
             this.setState({spinner: !this.state.spinner});
           } else {
-            alert(data.message);
+            Alert.alert('Thông báo', 'Đã tồn tại giờ tưới này, vui lòng nhập lại', [
+              {
+                text: 'Đồng ý',
+                onPress: () => null,
+                style: 'destructive',
+              },
+            ]);
             console.log('Sửa thất bại');
             this.setState({spinner: !this.state.spinner});
           }
@@ -797,7 +803,15 @@ export default class Schedule extends Component {
             this.setModalVisible(false);
             this.setState({spinner: !this.state.spinner});
           } else {
-            alert(data.message);
+            //alert(data.message);
+
+            Alert.alert('Thông báo', 'Đã tồn tại giờ tưới này, vui lòng nhập lại', [
+              {
+                text: 'Đồng ý',
+                onPress: () => null,
+                style: 'destructive',
+              },
+            ]);
             console.log('Thêm thất bại');
             this.setState({spinner: !this.state.spinner});
           }
@@ -805,6 +819,22 @@ export default class Schedule extends Component {
         if (data.action == 'deleteSchedule') {
           if (data.message == 'deleteSuccess') {
             //console.log('deleteSuccess');
+
+            Animated.parallel([
+              Animated.timing(this.state.controlOpacity, {
+                toValue: 0,
+                duration: 400,
+              }),
+              Animated.timing(this.state.controlHeight, {
+                toValue: 0,
+                duration: 400,
+              }),
+              Animated.timing(this.state.controlWidth, {
+                toValue: 0,
+                duration: 400,
+              }),
+            ]).start();
+
             this.setState({dialogVisible: false});
 
             this.setState({isChecked: new Array()});
