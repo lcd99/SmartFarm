@@ -178,6 +178,7 @@ export default class HistorySchedule extends Component {
                   </Left>
                   <Text style={styles.txtDays}>{this.state.chosenDate}</Text>
                   <DateTimePickerModal
+                            headerTextIOS="Chọn ngày xem lịch sử tưới"
                     isVisible={this.state.isPickerVisible}
                     onConfirm={this.handleConfirm}
                     onCancel={this.hidePicker}

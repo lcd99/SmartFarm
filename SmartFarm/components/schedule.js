@@ -54,6 +54,7 @@ import websocket from './websocket.js';
 //import TimePicker from 'react-native-simple-time-picker';
 
 import ReactNativeAN from 'react-native-alarm-notification';
+import { color } from 'react-native-reanimated';
 
 const alarmNotifData = {
   title: 'Chuẩn bị tưới',
@@ -1009,6 +1010,7 @@ export default class Schedule extends Component {
                               {this.state.chosenTime}
                             </Text>
                             <DateTimePickerModal
+                            headerTextIOS="Chọn giờ tưới"
                               isVisible={isPickerVisible}
                               onConfirm={this.handleConfirm}
                               onCancel={this.hidePicker}
@@ -1577,6 +1579,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    color: '#000',
   },
 
   txtSelectTime: {

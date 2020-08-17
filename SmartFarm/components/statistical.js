@@ -354,7 +354,7 @@ export default class Statistics extends Component {
                 <Form>
                   <Picker
                     //mode="dropdown"
-                    //iosHeader="Select your SIM"
+                    iosHeader="Chọn loại xem"
                     iosIcon={<Icon name="arrow-down" />}
                     //style={styles.optionsStatistics}
                     selectedValue={this.state.selected}
